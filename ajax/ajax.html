@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .usrCont{
+            background-color:#cfcfa6;
+            margin:10px;
+            width:300px;
+            display: inline-block;
+            padding: 5px;
+        } 
+        .cnt{
+            display:flex;
+        }
+        .usrCont > img, usrCont > ul{
+            display: block;
+        }
+        .usrCont img{padding: 0px 5px 0px; align-self: center;
+               } 
+        ul{
+        list-style: none;
+    margin: 0px;
+    padding: 0px 0px 0px 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">click here</button>
+    <div id="demo"></div>
+    <script>document.getElementById('btn').addEventListener('click', loadTxt);
+/*     function loadTxt(){
+        //console.log("button clicked");
+        var xhr=new XMLHttpRequest();
+        //console.log(xhr);
+        xhr.open('GET','samp.txt',true);
+       
+    xhr.onreadystatechange=function(){
+        if(this.readyState == 4 && this.status == 200){
+            document.getElementById('demo').innerHTML=this.responseText;
+           // console.log(this.responseText);
+        }
+    }
+        xhr.send();
+    } */
+   /*  function loadTxt(){
+        //console.log("button clicked");
+        var xhr=new XMLHttpRequest();
+        //console.log(xhr);
+        xhr.open('GET','user.json',true);
+       
+    xhr.onload=function(){
+        if(this.status == 200){
+          var usr=JSON.parse(this.responseText);
+          var out="";
+          for(var i in usr){
+              out+=(out === ''?' ':", ") +usr[i];
+          }*/
+          /* out='<ul>'+
+            '<li>'+usr.id+'</li>'+
+            '<li>'+usr.name+'</li>'+
+            '<li>'+usr.email+'</li>'+
+            '</ul>' */
+          /*  document.getElementById('demo').innerHTML=out;
+           // console.log(this.responseText);
+         }
+    }
+        xhr.send();
+    } */
+   /*  function loadTxt(){
+        var xhr=new XMLHttpRequest();
+        //console.log(xhr);
+        xhr.open('GET','users.json',true);
+       
+    xhr.onload=function(){
+        if(this.status == 200){
+          var usrs=JSON.parse(this.responseText);
+          var out="";
+          for(var i in usrs){
+           out+='<ul>'+
+            '<li>'+usrs[i].id+'</li>'+
+            '<li>'+usrs[i].name+'</li>'+
+            '<li> <a href=mailto:'+usrs[i].email+'>'+usrs[i].email+'</a></li>'+
+            '</ul>'
+           }
+            document.getElementById('demo').innerHTML=out;
+         }
+    }
+        xhr.send();
+} */
+function loadTxt(){
+        var xhr=new XMLHttpRequest();
+        //console.log(xhr);
+        xhr.open('GET','https://api.github.com/users',true);
+       
+    xhr.onload=function(){
+        if(this.status == 200){
+          var usrs=JSON.parse(this.responseText);
+          var out="";
+          for(var i in usrs){
+           out+= '<div class="usrCont"> <div class="cnt">' +
+           '<img src='+usrs[i].avatar_url+' width="40" height="100%">'+
+           '<ul>'+
+            '<li>'+usrs[i].login+'</li>'+
+            '<li>'+usrs[i].url+'</li>'+
+            '</ul>'+
+            '</div></div>'
+           }
+            document.getElementById('demo').innerHTML=out;
+         }
+    }
+        xhr.send();
+}
+    </script>
+</body>
+</html>
