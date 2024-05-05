@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+table, tr, th, td{
+	border:1px solid #000;
+	border-collapse:collapses;
+	padding:2px;
+	}
+</style>
+</head>
+
+<body>
+<h1>OOPS concept</h1>
+<h2><strong>Run the console</strong></h2>
+<script>
+/*non functional object*/
+var person={
+	name: "Sam",
+	age: 34,  
+	education: "M.S",
+	address: {
+	street: '312 main st',
+	city: 'los angeles',
+	state: 'USA'
+	}, 
+	getInfo: function(){
+		return this.name +" is age "+ this.age +" and studied at " + this.education + " and lives in " + this.address.street +", "+ this.address.city +", " +this.address.state;
+	}
+};
+	console.log( person.name);
+	console.log( person.address.state);
+	console.log( person.getInfo());
+	document.write( "<p><strong>Non function object</strong></p>"+person.name);
+	document.write( "<br>"+person.address.state);
+	document.write( "<br>"+person.getInfo());
+/*functional object*/
+function personInfo( name, age, education){
+	this.name=name,
+	this.age=age,  
+	this.education=education, 
+	this.getInfo=function(){
+		return this.name +" is age "+ this.age +" and studied at " + this.education;
+	}
+};
+var person1= new personInfo('John',43, 'B.E');
+var person2= new personInfo('Mary',23, 'B.Tech');
+console.log(person1.getInfo());
+console.log(person2.getInfo());
+document.write( "<p><strong>Functional object</strong></p>"+person1.getInfo());
+document.write( "<br>"+person2.getInfo());
+function changeName(personInfo){
+	personInfo.name="Sue Smith";
+};
+changeName(person1);
+console.log(person1.name);
+document.write("<br>change name john to sue smith: "+person1.name);
+/*for(var prop in person1){
+	console.log(prop + ": " +person1[prop]);
+}*/
+/*functional object with prototypes*/
+personInfo.prototype.profession="Technical head";
+personInfo.prototype.work=function(){
+	return this.profession;
+};
+person2.profession="Software head";
+console.log(person1.name + " work as "+ person1.work());
+console.log(person2.name + " work as "+ person2.work());
+document.write( "<p><strong>Add prototype</strong></p>"+person1.name + " work as "+ person1.work());
+document.write( "<br>"+person2.name + " work as "+ person2.work());
+/*for(var prop in person1){
+	console.log(prop + ": " +person1[prop]);
+}
+*/
+console.log("person has own property name "+person1.hasOwnProperty('name'));
+console.log("person has own property profession "+person1.hasOwnProperty('profession'));
+document.write("<br>person has own property name "+person1.hasOwnProperty('name'));
+document.write("<br> person has own property profession "+person1.hasOwnProperty('profession'));
+
+/*getter and setter non function object*/
+var address={
+	street:"no street",
+	city:"no city",
+	state:"no state",
+	get getAddress(){
+		return this.street + ", "+ this.city + ", "+ this.state ;
+	},
+	set setAddress(theaddress){
+		var part=theaddress.toString().split(", ");
+		this.street=part[0] || "";
+		this.city=part[1] || "";
+		this.state=part[2] || "";
+	}
+	};
+	address.setAddress="1231 Street Lt, Los Angeles, USA";
+	console.log(address.city);
+	console.log(address.getAddress);
+	document.write("<p><strong>Non functional object getter and setter:</strong> </p>"+address.city);
+	document.write("<br>"+address.getAddress);
+
+/*definegetter and definesetter function object*/
+function addressInfo(){
+	this.street="no street",
+	this.city="no city",
+	this.state="no state"
+	}
+	Object.__defineGetter__.call(addressInfo.prototype,"getAdd",function(){
+		return this.street + ", "+ this.city + ", "+ this.state ;
+	});
+	Object.__defineSetter__.call(addressInfo.prototype,"setAdd",function(theAdd){
+		var part=theAdd.toString().split(", ");
+		this.street=part[0] || "";
+		this.city=part[1] || "";
+		this.state=part[2] || "";
+	});
+	var addInf=new addressInfo();
+	addInf.setAdd="1419 Westwood Blvd, Los Angeles, CA";
+	console.log(addInf.city);
+	console.log(addInf.getAdd);
+	document.write("<p><strong>functional object defineGetter and defineSetter:</strong> </p>"+addInf.city);
+	document.write("<br>"+addInf.getAdd);
+	
+	/*defineProperty function object*/
+function locationInfo(){
+	this.street="no street",
+	this.city="no city",
+	this.state="no state"
+	}
+	Object.defineProperty(locationInfo.prototype,"loc",{
+		get:function(){
+		return this.street + ", "+ this.city + ", "+ this.state ;
+	},
+	set:function(theadd){
+var part=theadd.toString().split(", ");
+		this.street=part[0] || "";
+		this.city=part[1] || "";
+		this.state=part[2] || "";
+	}
+	});
+	
+	var addInfMn=new locationInfo();
+	addInfMn.loc="141 Westwood Blvd, New York, NW";
+	console.log(addInfMn.city);
+	console.log(addInfMn.loc);
+	document.write("<p><strong>functional object defineProperty:</strong> </p>"+addInfMn.city);
+	document.write("<br>"+addInfMn.loc);
+/*Constructor Function Getters / Setters */
+function circle(radius){
+	this._radius=radius;
+}
+circle.prototype={
+	set radius(radius){this._radius=radius;},
+	get radius(){return this._radius;},
+	get area(){return Math.PI *(this._radius * this._radius);}
+}
+var cir= new circle(121);
+cir.radius=12;
+console.log("Radius is: " +cir.radius+ ". Area of circle: "+ cir.area);
+document.write("<p><strong>Constructor getter and setter. </strong></p> Radius is:" +cir.radius+ ". Area of circle: "+ cir.area);
+/*inheritance*/
+function mary(){
+	this.name="Mary",
+	this.age=23,  
+	this.education="M.SC"
+};
+mary.prototype=new personInfo();
+mary.prototype.constructor=mary;
+var s=new mary();
+console.log(s instanceof personInfo);
+/*for(prop in s){
+	console.log(`${prop}: ${s[prop]}`);
+}
+*/s.profession="Sr. Front End Developer";
+console.log(s.getInfo()+" and work as " + s.work());
+document.write("<p><strong>Inheritance mary details in personInfo</strong></p>"+s.getInfo()+" and work as " + s.work());
+/*call parent functions */
+mary.prototype.work=function(){
+	var addMsg= personInfo.prototype.work.apply(this);
+	return addMsg+= " from last five years";
+};
+console.log(s.name +" work as "+s.work());
+document.write("<p><strong>Call parent functions </strong></p>"+s.name +" work as "+s.work());
+
+</script> 
+		
+</body>
+</html>

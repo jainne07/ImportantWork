@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <p>hell sddsad o world</p> 
+</body>
+<script>
+   var users = [{
+      first_name: "Brithany",
+      last_name: "Allison",
+      birthday: 1993,
+      profession:'Artist'
+  },
+  {
+      first_name: "Sonya",
+      last_name: "Slowers",
+      birthday: 1967,
+      profession:'Artist'
+  },
+  {
+      first_name: "Ashley",
+      last_name: "Pratt",
+      birthday: 1987,
+      profession:'Operator'
+  },
+  {
+      first_name: "Sam",
+      last_name: "Smith",
+      birthday: 1998,
+      profession:'Engineer'
+  }
+];
+    var age =[21, 22, 34, 12, 10, 56, 88];
+    //foreach array
+      /*  for(var s in users){
+        console.log(users[s].last_name);
+    } */
+    /* for (let i=0; i<users.length; i++){
+        console.log(users[i].first_name);
+    }
+    users.forEach(function(usr){
+        console.log(usr.birthday);
+    }); */
+    /* console.clear(); */
+
+    //filter
+   /*  var old_age= [];
+    for(let i=0; i < age.length; i++){
+        if(age[i] >= 24){
+            old_age.push(age[i]);
+        }   
+    }
+    console.log(old_age) */ 
+   /*  var oldAge = age.filter(function(age){
+        if(age >= 24){
+            return true;
+        }
+    }) */
+   /*  var oldAge = age.filter(age =>(age >= 24))
+    console.log(oldAge) */
+// filter birthday year
+/* let birth=[];
+for(let i=0; i < users.length; i++){
+        if(users[i].birthday >= 1985){
+            birth.push(users[i].birthday);
+        }   
+    }
+    console.log(birth); */
+    /* let prof=[];
+for(let i=0; i < users.length; i++){
+        if(users[i].profession == 'Operator'){
+            prof.push(users[i]);
+        }   
+    }
+    console.log(prof); */
+    /* var prof=users.filter(profs => profs.profession == 'Operator');
+    console.log(prof); */
+   /*  var birth=users.filter(profs => (profs.birthday >= 1980 && profs.birthday <= 1994) );
+    console.log(birth); */
+
+    //map
+ /*    var ageSqu=age.map(ag => ag * 2);
+    console.log(ageSqu); */
+    /* var usr=users.map(birth => birth.first_name);
+    console.log(usr); */
+    //sort
+/*     var bith=users.sort((a,b) => (a.birthday > b.birthday ? 1 : -1));
+    console.log(bith);
+    var ageAsc=age.sort((a,b) => a - b);
+    console.log(ageAsc); */
+    /* var agedsc=age.sort((a,b) => b - a);
+    console.log(agedsc); */
+//reduce
+/* var ageTo=age.reduce((total, age) => total + age , 0);
+console.log(ageTo); */
+var bithTo=users.reduce((total, birth) => total + birth.birthday ,0);
+console.log(bithTo);
+//Most useful call
+const characters = [
+  {
+    name: "Luke Skywalker",
+    height: "172",
+    mass: "77",
+    eye_color: "blue",
+    gender: "male",
+  },
+  {
+    name: "Darth Vader",
+    height: "202",
+    mass: "136",
+    eye_color: "yellow",
+    gender: "male",
+  },
+  {
+    name: "Leia Organa",
+    height: "150",
+    mass: "49",
+    eye_color: "brown",
+    gender: "female",
+  },
+  {
+    name: "Anakin Skywalker",
+    height: "188",
+    mass: "84",
+    eye_color: "blue",
+    gender: "male",
+  },
+];
+//MAP
+//Get an array of all names
+const solut1=characters.map(item=>item.name)
+console.log(solut1)
+//Get an array of all heights
+const solut2=characters.map(item=>item.height)
+console.log(solut2)
+//Get an array of objects with just name and height properties
+const solut3=characters.map(item=>({name: item.name, height: item.height}))
+console.log(solut3)
+//Get an array of all first names
+const solut4=characters.map(item=>item.name.split(' ')[0])
+console.log(solut4)
+//Reduce
+//Get the total mass of all characters
+const solut5=characters.reduce((t,c)=> t + parseInt(c.mass),0)
+console.log(solut5)
+//Get the total height of all characters
+const solut6=characters.reduce((t,c)=> t + +c.height,0)
+console.log(solut6)
+//Get the total number of characters in all the character names
+const solut7=characters.reduce((t,c)=> ({...t, [c.name]: t[c.name]? t[c.name]+ 1: 1}),{})
+console.log(solut7)
+//Get the total number of characters by eye color (hint. a map of eye color to count)
+const solut8=characters.reduce((t,c)=> ({...t, [c.eye_color]: t[c.eye_color]? t[c.eye_color]+ 1: 1}),{})
+console.log(solut8)
+//Filter
+//Get characters with mass greater than 100
+const solut9=characters.filter(item=> +item.mass > 100)
+console.log(solut9)
+//Get characters with height less than 200
+const solut10=characters.filter(item=> +item.height < 200)
+console.log(solut10)
+//Get all male characters
+const solut11=characters.filter(item=> item.gender === "male")
+console.log(solut11)
+//Get all female characters
+const solut12=characters.filter(item=> item.gender === "female")
+console.log(solut12)
+//Sort
+//Sort by mass
+const sol2=characters.sort((a, b)=> +a.mass < +b.mass ? -1 : 1)
+console.log(sol2)
+//Sort by height
+const sol3=characters.sort((a, b)=> +a.height < +b.height ? -1 : 1)
+console.log(sol3)
+//Sort by gender
+const sol4=characters.sort((a, b)=> a.gender < b.gender ? -1 : 1)
+console.log(sol4)
+//Every
+//Does every character have blue eyes?
+const sol5=characters.every(a=> a.eye_color==="blue")
+console.log(sol5)
+//Does every character have mass more than 40?
+const sol6=characters.every(a=> +a.mass > 40)
+console.log(sol6)
+//Is every character shorter than 200?
+const sol7=characters.every(a=> +a.height < 200)
+console.log(sol7)
+//Is every character male?
+const sol8=characters.every(a=> a.gender ==="male")
+console.log(sol8)
+//Some
+//Is there at least one male character?
+const sol9=characters.some(a=> a.gender ==="male")
+console.log(sol9)
+//Is there at least one character with blue eyes?
+const sol10=characters.some(a=> a.eye_color==="blue")
+console.log(sol10)
+//Is there at least one character taller than 200?
+const sol11=characters.some(a=> +a.height < 200)
+console.log(sol11)
+//Is there at least one character that has mass less than 50?
+const sol12=characters.some(a=> +a.mass < 50)
+console.log(sol12)
+</script>
+</html>

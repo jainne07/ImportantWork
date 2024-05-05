@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function personInfo( name, age, education){
+        this.name=name,
+        this.age=age,  
+        this.education=education
+       /*  this.getInfo=function(){
+            return this.name +" is age "+ this.age +" and studied at " + this.education;
+        } */
+    }
+    personInfo.prototype.getInfo= function(){
+            return this.name +" is age "+ this.age +" and studied at " + this.education;
+        }
+    var person1= new personInfo('John',43, 'B.E');
+var person2= new personInfo('Mary',23, 'B.Tech');
+/* console.log(person1);
+console.log(person2.getInfo()); */
+//inheritance
+function engineer(name, age, education, profs){
+  personInfo.call(this, name, age, education);
+  this.profs=profs;
+}
+engineer.prototype = new personInfo();
+engineer.prototype.constructor=engineer;
+var person3= new engineer('Sam',23, 'B.Tech','engineer');
+/* console.log(person3);
+console.log(person3.profs);
+
+console.log(person3.getInfo()); */
+
+//class
+class person{
+    constructor( name, age, education){
+        this.name=name,
+        this.age=age,  
+        this.education=education
+    }
+     getInfo=function(){
+            return this.name +" is age "+ this.age +" and studied at " + this.education;
+        } 
+    }
+    /* var person4= new person('Sam',33, 'B.Tech');
+        console.log(person4.getInfo()); */
+        //extend
+        class sam extends person{
+    constructor( name, age, education, profs){
+       super(name, age, education);
+       this.profs=profs;
+    }
+    }
+    var person5= new sam('smith',33, 'B.Tech','Engineer');
+        console.log(person5.getInfo() + " work as " + person5.profs);
+</script>
+</body>
+</html>

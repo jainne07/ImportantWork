@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+	body{
+		margin:20px auto;
+		width:80%;
+	}	
+.text-vertical{
+  margin:0px auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:3;
+  line-height: 21px;
+  max-height: 63px;
+  -webkit-box-orient:vertical;
+    /*display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: N;
+    line-height: X; 
+    max-height: X*N;
+    */
+}
+.text-horizontal{
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.center {
+position: absolute;
+height: 50px;
+width: 50px;
+background: red;
+top: calc(50% - 50px / 2); /* height divided by 2*/
+left: calc(50% - 50px / 2); /* width divided by 2*/
+}
+
+.center-2 {
+position: absolute;
+background: #ccc;
+left: 50%;
+width: 150px;
+margin-left: -75px; /* width * -0.5 */
+top: 50%;
+height: 200px;
+margin-top: -100px; /* height * -0.5 */
+}
+	</style>
+</head>
+<body>
+	<h2>Vertical overflow</h2>
+	<div class="text-vertical">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab, aperiam obcaecati exercitationem incidunt numquam, eius, voluptatem aspernatur dolorum excepturi quidem, mollitia. Architecto distinctio sint aliquam beatae molestiae commodi perspiciatis expedita exercitationem soluta libero maxime, molestias excepturi quos dolore laborum omnis, eos consectetur pariatur. Itaque error asperiores fuga illo minus, delectus perferendis. Maxime exercitationem excepturi illo non, aliquam explicabo sed eaque ab error doloribus. Numquam autem pariatur earum expedita, veritatis, odit sed, doloremque dolor quas fugiat voluptatem quod. At a fuga velit ex dolorum aspernatur repellat itaque modi magni commodi</div>
+  <h2>Horizontal overflow</h2>
+  <div class="text-horizontal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur reprehenderit nobis eveniet voluptate, excepturi ab ipsa, nulla, eius molestias quibusdam, atque dicta itaque consectetur. Voluptatum animi error dolorem facere? Repudiandae reiciendis ea quod, aut.</div>
+  <!-- <h2>Using calc()</h2>
+  <div class="center"></div> -->
+<!-- <h2>Centering with fixed size</h2>  
+<div class="center-2"></div> -->
+</body>
+</html>

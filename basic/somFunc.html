@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Important function</title>
+  </head>
+  <body>
+    <script>
+      //function reverse
+      arrayToClone = [1, 2, 3, 4, 5, 6, 11117, 2118, 1, 4, 0];
+      function rev(str) {
+        var result = "";
+        for (var i = str.length - 1; i >= 0; i--) {
+          if (typeof str === "object") {
+            result += str[i] + " ";
+          } else {
+            result += str[i];
+          }
+        }
+        return result;
+      }
+      console.log(rev(arrayToClone));
+      console.log(rev("hello this is sample reverse"));
+
+      //function maxvalue
+      function maxval(arr) {
+        var maxval = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          var currentval = arr[i];
+          if (currentval > maxval) {
+            maxval = currentval;
+          }
+        }
+        return maxval;
+      }
+      //function maxvalue
+      function minvalu(arr) {
+        var minvalu = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          var currentval = arr[i];
+          if (currentval < minvalu) {
+            minvalu = currentval;
+          }
+        }
+        return minvalu;
+      }
+      console.log(maxval(arrayToClone));
+      console.log(minvalu(arrayToClone));
+
+      //function unique
+      function unq(arr) {
+        var a = [];
+        for (var i = 0; i < arr.length; i++)
+          if (a.indexOf(arr[i]) === -1 && arr[i] !== "") {
+            a.push(arr[i]);
+          }
+        return a;
+      }
+      console.log(arrayToClone);
+      console.log(unq(arrayToClone));
+      //group by object
+      let obj = [
+        { name: "Rahul", age: 30 },
+        { name: "Neha", age: 28 },
+        { name: "Raj", age: 28 },
+      ];
+      const groupBy = function (items, key) {
+        return items.reduce(function (result, item) {
+          (result[item[key]] = result[item[key]] || []).push(item);
+          return result;
+        }, {});
+      };
+
+      console.log(groupBy(obj, "age"));
+      function group(obj, key) {
+        let result = {};
+        for (element of obj) {
+          console.log(element[key]);
+          if (!(element[key] in result)) {
+            result[element[key]] = [];
+          }
+          result[element[key]].push(element);
+        }
+        return result;
+      }
+      console.log(group(obj, "age"));
+
+      const groupShort = (a, key) => {
+        return a.reduce((p, c) => {
+          return { ...p, [c[key]]: [...(p[c[key]] || []), c] };
+        }, {});
+      };
+      console.log("short", groupShort(obj, "age"));
+
+      //array into group by its length
+      const arr = ["one", "two", "three"];
+      const res = arr.reduce((p, cv) => {
+        const c = cv.length;
+        return { ...p, [c]: [...(p[c] || []), cv] };
+      }, {});
+      console.log(res);
+
+      //merge by id and type
+      const idmerge = [
+        { id: 1, type: "ADD" },
+        { id: 1, type: "CHANGE" },
+        { id: 2, type: "ADD" },
+        { id: 3, type: "ADD" },
+        { id: 3, type: "CHANGE" },
+        { id: 2, type: "REMOVE" },
+        { id: 3, type: "CHANGE" },
+        { id: 1, type: "REMOVE" },
+      ];
+
+      const merge = idmerge.reduce((p, v) => {
+        p[v.id] = p[v.id] || { id: v.id, type: [] };
+        p[v.id]["type"].push(v.type);
+        return p;
+      }, {});
+      console.log(merge);
+
+      //non-repetitive numbers in a given array
+      let int = [2, 3, 4, 3, 3, 2, 4, 2, 11, 9, 1, 2, 5, 5];
+      function chk(arr) {
+        const check = arr.reduce(
+          (p, v) => ({ ...p, [v]: p[v] ? p[v] + 1 : 1 }),
+          {}
+        );
+        let chkData = [];
+        for (let key in check) {
+          if (check[key] === 1) {
+            chkData.push(key);
+          }
+        }
+        return chkData;
+      }
+      console.log(chk(int));
+
+      //flat array
+      let flatArr = [1, [2, [3, [4, [5, 6]]]]];
+      //const check=flatArr.flat(Infinity)
+      const check = String(flatArr)
+        .split(",")
+        .map((v) => +v);
+      console.log(check.length);
+
+      //palindrome
+      let palinText = "hello";
+      let palintxt = "abba";
+      function pali(a) {
+        let chk = [...a].reverse().join("");
+        if (a === chk) {
+          return "Palindrome";
+        } else {
+          return "Not is palindrome";
+        }
+      }
+      console.log(pali(palinText));
+      console.log(pali(palintxt));
+
+      //most repeated elements
+      let mostRep = [12, 5, 6, 76, 23, 12, 34, 5, 23, 34, 65, 34, 22, 67, 34];
+
+      function chk(mostRep) {
+        const check = [...mostRep].reduce(
+          (p, v) => ({ ...p, [v]: p[v] ? p[v] + 1 : 1 }),
+          {}
+        );
+        console.log(check);
+        let chkdata = [];
+        getVal = Object.values(check);
+        let maxValue = Math.max(...getVal);
+        for (let key in check) {
+          if (check[key] === maxValue) {
+            chkdata.push(key, check[key]);
+          }
+        }
+        return chkdata;
+      }
+      console.log(chk(mostRep));
+
+      //without sort function sorting
+      function sortArray(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length; j++) {
+                    if (arr[i] < arr[j]) {
+                       [arr[i], arr[j]]=[arr[j],arr[i]]
+                    }
+                }
+            }
+            return arr;
+}
+console.log(sortArray([2, 6, 0, 4, 3, 4, 3, 5, 9, 6, 12, 43, 6]));
+    </script>
+  </body>
+</html>

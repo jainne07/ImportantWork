@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style type="text/css">
+		body,html,textarea{height:100%;width:100%;margin:0;padding:0;border:0}
+		textarea{background:url(textarea.png);line-height:20px;font-size:15px;resize:none;outline:0}
+	</style>
+	<script type="text/javascript">
+			var re = new RegExp("^\\s*\\d+\\.?", "gm");
+
+			function removeLineNumbers(textArea) {
+				textArea.value = textArea.value.replace(re, "");
+			}
+		</script>
+</head>
+<body onload="document.getElementById('textarea').focus()">
+		<textarea id="textarea" onkeyup="removeLineNumbers(this)" rows="50" cols="250">Copy-paste code here to remove the line numbers.</textarea>
+</body>
+</html>

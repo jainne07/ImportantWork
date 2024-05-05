@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>xml &amp; ajax</title>
+<style>
+table, tr, th, td{
+	border:1px solid #000;
+	border-collapse:collapses;
+	padding:2px;
+	}
+</style>
+</head>
+
+<body>
+<p><strong>CD catalog</strong></p>
+<button id="btn">click here</button><br>
+<div id="info"></div>
+<script>
+var btnMn=document.getElementById('btn');
+var infoMn=document.getElementById('info');
+btnMn.addEventListener("click", function(){
+var request=new XMLHttpRequest();
+request.open('GET','cd_catalog.xml',true);
+request.onload=function(){
+	var ourData=request.responseXML;
+	myFunction(ourData);
+}
+request.send();
+});
+function myFunction(xmlDoc) {
+  var i;
+  var table="";
+  table+="<table><tr><th>Artist</th><th>Title</th></tr>";
+  var x = xmlDoc.getElementsByTagName("CD");
+  for (i = 0; i < x.length; i++) {
+	  if(i == 4){
+		  break;
+	  }
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  table+="</table>";
+  infoMn.innerHTML = table;
+}
+</script>
+		
+</body>
+</html>

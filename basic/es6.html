@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+table, tr, th, td{
+	border:1px solid #000;
+	border-collapse:collapses;
+	padding:2px;
+	}
+</style>
+</head>
+
+<body>
+<h1>ES6 concept</h1>
+<h2><strong>Run the console</strong></h2>
+<script type="text/javascript">
+/*get Es6 script */
+if(true){
+	let x = 21;
+	console.log("x is: "+x);
+}
+//console.log("x is: "+x);
+/*template literals */
+var fname="sam";
+var lname=" smith";
+console.log(`The fullname is ${fname + lname}`);
+/*Tagged Template Literals */
+function doMath(strings,...values){
+	if(strings[0] == 'add'){
+		console.log(`Add ${values[0]} + ${values[1]} = ${values[0] + values[1]}`);
+	}else if(strings[0] == 'sub'){
+		console.log(`Subtract ${values[0]} - ${values[1]} = ${values[0] - values[1]}`);
+	}
+};
+doMath `add${40} ${20}`;
+doMath `sub${40} ${20}`;
+/*rest parameters*/
+function getAdd(...values){
+	let sum=0;
+	for(var i=0; i<values.length; i++){
+	sum+=values[i];
+	}
+	return sum;
+};
+console.log(getAdd(1,3,2,6,7));
+console.log(getAdd(1,4,2,6,7));
+/*arrow function*/
+let diff =(num1, num2)=>{
+	return num1 - num2;
+	};
+console.log(diff(3,1));
+/*objects */
+var person={
+	name:"John",
+	job:"Frontend developer",
+	getInfo: function(){
+	return this.name +", "+this.job;
+	}
+};
+var cpPrs=Object.assign({}, person);
+console.log(cpPrs.getInfo());
+console.log('Object assign');
+for (var val in cpPrs){
+console.log(`${val}: ${cpPrs[val]}`);
+};
+/*object create*/
+var james=Object.create(person);
+james.name="James";
+console.log(james.getInfo());
+var sam=Object.create(person);
+console.log(sam.getInfo());
+/*object de-structuring*/
+let {name, job}=person;
+console.log("The Object De-structuring: "+name +", "+ job);
+/*arrays de-structuring*/
+let nums=[2.12,3.1,34.23];
+let [,chaos,]=nums
+console.log(chaos);
+/*classes*/
+class Mammal{
+constructor(name){
+	this._name=name
+}
+set name(name){
+	this._name=name;
+}
+get name(){
+	return this._name;
+}
+static makeMammal(name){
+	return new Mammal(name);
+}
+getInfo(){
+	return `${this.name} is a mammal`
+}
+}
+var monkey=new Mammal('apes');
+console.log(monkey.getInfo());
+monkey.name="mark";
+console.log(monkey.name +" mammal name has changed");
+let chipmunk=Mammal.makeMammal('saun');
+console.log(`Mammal2: ${chipmunk.getInfo()}`);
+/*inheritance */
+class Owner extends Mammal{
+	constructor(name, owner){
+		super(name),
+		this._owner=owner;
+	}
+set owner(owner){
+	this._owner=owner;
+}
+get owner(){
+	return this._owner;
+}
+getInfoMn(){
+	return `${super.getInfo()} and his owner name is ${this.owner}`;
+}
+}
+var dog=new Owner('Brandy','Sue Smith');
+console.log(dog.getInfoMn());
+function getClass(classType){
+	if(classType==1){
+		return Mammal;
+	}else{
+		return Owner;
+	}
+}
+class Carol extends getClass(2){
+constructor(name, owner){
+super(name, owner)
+}
+}
+let panda=new Carol('Karol','Mary frenandes');
+console.log(panda.getInfo());
+/*symbol */
+let captial=Symbol('state Captial');
+let america={
+	captial:'New York'
+}
+console.log(america.captial);
+console.log(captial.toString());
+/*arrays passing by function*/
+var names=['jack','james','sue','tom','sam','julie'];
+function dispNam(nam){
+var s={};
+for(var i=0; i<nam.length;i++){
+	if(i == 0){
+	s=nam[i].charAt(0).toUpperCase()+nam[i].substr(1);
+	}
+	else{
+		s+=", "+nam[i].charAt(0).toUpperCase()+nam[i].substr(1);
+	}
+}
+return s;
+}
+var jobs=['frontend developer','software engineer','tester'];
+console.log(dispNam(names));
+console.log(dispNam(jobs));
+/*generators */
+function* rainbow() { 
+   // the asterisk marks this as a generator 
+   yield 'red'; 
+   yield 'orange'; 
+   yield 'yellow'; 
+   yield 'green'; 
+   yield 'blue'; 
+   yield 'indigo'; 
+   yield 'violet'; 
+} 
+for(let color of rainbow()) { 
+   console.log(color); 
+} 
+/*maps*/
+var roles = new Map(); 
+roles.set('r1', 'User') 
+.set('r2', 'Guest') 
+.set('r3', 'Admin');
+
+//console.log("maps "+roles.size);
+for(let map of roles) { 
+   console.log(map); 
+}
+for(let m of roles.entries()) { 
+   console.log(`${m[0]}: ${m[1]}`); 
+} 
+var itr = roles.values(); 
+console.log('Values of maps');
+console.log(itr.next().value); 
+console.log(itr.next().value);
+console.log(itr.next().value);
+
+function fetch(value,key){
+	console.log(`${key}: ${value}`);
+}
+roles.forEach(fetch);
+roles.delete("r2");
+roles.forEach(fetch);
+var itr = roles.keys(); 
+console.log('Values of keys');
+console.log(itr.next().value); 
+console.log(itr.next().value);
+
+var itr = roles.entries(); 
+console.log(itr.next().value); 
+console.log(itr.next().value);
+//roles.clear();
+//console.log(roles.size);
+/*promise */
+function getSum(n1, n2) {   
+   var isAnyNegative = function() {   
+      return n1 < 0 || n2 < 0;   
+   }   
+   var promise = new Promise(function(resolve, reject) {   
+      if (isAnyNegative()) {   
+         reject(Error("Negatives not supported"));   
+      }   
+      resolve(n1 + n2)
+   });   
+   return promise;   
+} 
+
+getSum(5, 6)   
+.then(function(result) {   
+   console.log(result);   
+   return getSum(10, 20); 
+   // this returns another promise   
+},   
+function(error) {   
+   console.log(error);   
+})   
+.then(function(result) {   
+   console.log(result); 
+  // return getSum(10, -20);   
+}, 
+function(error) {   
+   console.log(error);
+});
+/*.then(function(result) {   
+   console.log(result); 
+   }, 
+function(error) {   
+   console.log(error);
+});    
+*/
+
+</script> 
+		
+</body>
+</html>

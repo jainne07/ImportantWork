@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>json &amp; ajax</title>
+<style>
+table, tr, th, td{
+	border:1px solid #000;
+	border-collapse:collapses;
+	padding:2px;
+	}
+</style>
+</head>
+
+<body>
+<strong>Person</strong><br><br>
+<button id="btn">click here</button>
+<div id="info"></div>
+<script>
+var btnMn=document.getElementById('btn');
+var infoMn=document.getElementById('info');
+btnMn.addEventListener("click", function(){
+var request=new XMLHttpRequest();
+request.open('GET','json.text');
+request.onreadystatechange =function(){
+	    if (this.readyState == 4 && this.status == 200) {
+
+	var ourData=JSON.parse(request.responseText);
+	//infoMn.innerHTML=ourData[1].name
+	myFunction(ourData);
+}
+    };
+request.send();
+});
+function myFunction(data) {
+  var j;
+  var str =" ";
+  for (i = 0; i < data.length; i++) {
+	  str+="<p>"+data[i].name+ "age is "+data[i].age+ ", "; 
+	  for (j = 0; j < data[i].cars.length; j++) {
+		  if(j==0){
+	  str +=data[i].cars[j]; 
+		  }
+		  else{
+			   str += " and "+data[i].cars[j];
+		  }
+	  }
+	  str +="</p>"
+	 }
+  infoMn.innerHTML = str;
+}
+	
+</script>
+		
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+table, tr, th, td{
+	border:1px solid #000;
+	border-collapse:collapses;
+	padding:2px;
+	}
+</style>
+</head>
+
+<body>
+<h1>String & Array object</h1>
+<h2><strong>Run the console</strong></h2>
+<script type="text/javascript">
+str="hello world";
+str1="welcome to";
+str2="concat";
+str3="   Hello World    ";
+console.log(str.charAt(1));
+console.log(str.charCodeAt(0));
+for (var i = 0; i < str.length; i++) {
+    // Use charCodeAt to get ASCII values from letters.
+    var point = str.charCodeAt(i);
+		console.log(point+" ");
+}
+
+console.log(String.fromCharCode(104,101,108,108,111,32));
+console.log(str.toLowerCase());
+console.log(str.toUpperCase());
+console.log(str.startsWith('hell'));
+console.log(str.startsWith('e',1));
+console.log(str.endsWith('d'));
+console.log(str.endsWith('l',10));
+console.log("Without gap:- "+str.concat(str1, str2));
+console.log("With gap:- "+str.concat(" ").concat(str1).concat(" ").concat(str2));
+console.log(str.includes('world'));
+console.log(str.slice(2,10));
+console.log(str.slice(1));
+console.log(str.substr(1,6));
+console.log(str.substr(1));
+console.log(str.substring(1,6));
+console.log(str.substring(2));
+console.log(str.split(' ',1));
+console.log(str.split("o"));
+console.log(str.indexOf("e",0));
+console.log(str.lastIndexOf("d",12));
+console.log(str.repeat(2));
+console.log(str.replace('hello','hi'));
+console.log(str3.trim());
+console.log(str.toString());
+console.log(str.valueOf());
+console.log(str.match(/o/gi));
+function titleCase(str) {
+  var s= str.split(' ').map(function(val){ 
+    return val.charAt(0).toUpperCase() + val.substr(1);
+  }).join(' ');
+  return s;
+}console.log(titleCase(str1)+" "+ titleCase(str2));
+console.log("Array ");
+/*arrays */
+var names=['jack','james','sue','tom','sam','julie'];
+var num=[11,35,33,46,1, 56,4];
+console.log(names.includes('julie'));
+console.log(names.concat(num));
+//console.log(names.copyWithin(2,0,2));
+console.log(names.indexOf('julie'));
+console.log(names.lastIndexOf('sam'));
+console.log(num.toString());
+console.log(Array.from('julie'));
+console.log(names.valueOf());
+console.log(names.reverse());
+console.log(names.sort());
+console.log(num.sort(function(a,b){return a-b}));
+//console.log(names.slice(2,6));
+console.log(names.splice(2,1,'mary'));
+console.log(names.valueOf());
+console.log(names.pop());
+console.log(names.push('jitin'));
+console.log(names.valueOf());
+console.log(names.shift());
+console.log(names.unshift('jim','suresh'));
+console.log(names.valueOf());
+console.log(names.fill('nick',1,2));
+
+//var it=names.entries();
+//console.log(it.next().value);
+//console.log(it.next().value);
+//console.log(it.next().value);
+//var it=names.keys();
+//console.log(it.next().value);
+//console.log(it.next().value);
+//console.log(it.next().value);
+function calc(itm, index, arr){
+	//console.log(index+": "+itm);
+	if(index==0){
+		console.log(itm*24);
+	}else{
+	console.log(itm*4);
+	}
+}
+function pwr(index){
+	console.log(Math.pow(index,2));
+}
+function no(val){
+	return val>=12;
+}
+num.forEach(calc);
+console.log("Power of num");
+num.map(pwr);
+console.log("Every Number");
+console.log(num.every(no));
+console.log(num.some(no));
+console.log(num.valueOf());
+console.log(num.filter(no));
+console.log(num.find(no));
+console.log(num.findIndex(no));
+console.log("Is Array");
+console.log(Array.isArray(num));
+console.log(names.join(' and '));
+function tot(total, value){
+	return total+ value;
+}
+console.log(num.reduce(tot));
+</script> 
+		
+</body>
+</html>
