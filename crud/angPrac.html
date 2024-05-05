@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            padding: 0px;
+        }
+        ul li{
+            background-color: lavender;
+            padding: 10px;
+            margin:4px 4px 4px 0px;
+            max-width:56%;
+            list-style: none;
+        }
+        ul li span {
+    color: red;
+    font: bold 20px tahoma;
+    float: right;
+    line-height: 17px;
+    cursor: pointer;
+     }
+     ul li span.edt {
+    color: #0000ff;
+    font: bold 14px tahoma;
+    float: right;
+    line-height: 21px;
+    cursor: pointer;
+    margin: 0px 0px 0px 10px;
+     }
+    </style>
+    <script src="angular.min.js"></script>
+<!--     <script src="angular-route.min.js"></script>
+ -->    <script>
+        /* angular.module('mainApp',['ngRoute']) */
+       angular.module('mainApp',[])
+        .controller('jsnCtrl',function($scope, $http){
+            $scope.currentUsr={};
+            /* $http.get('usrInfo.json')
+            .then(function(response){
+                $scope.usr=response.data
+            }) */
+            $scope.usr= [
+                {
+                    "name" : "Mahesh Pachangane",
+                    "company" : "Syntel India Pvt. Ltd",
+                    "designation" : "Associate"
+                },
+                {
+                    "name" : "Brijesh Shah",
+                    "company" : "Britanica Software Ltd.",
+                    "designation" : "Software Engineer"
+                },
+                {
+                    "name" : "Amit Mayekar",
+                    "company" : "Apex Solutions",
+                    "designation" : "Human Resource"
+                },
+                {
+                    "name" : "Ninad Parte",
+                    "company" : "Man-made Solutions",
+                    "designation" : "Senior Architect"
+                }/* ,
+                {
+                    "name" : "Sunil Shrivastava",
+                    "company" : "IBM",
+                    "designation" : "Project Lead"
+                },
+                {
+                    "name" : "Pranav Shastri",
+                    "company" : "TCS",
+                    "designation" : "Senior Software Engineer"
+                },
+                {
+                    "name" : "Madan Naidu",
+                    "company" : "KPMG",
+                    "designation" : "Senior Associate"
+                },
+                {
+                    "name" : "Amit Gangurde",
+                    "company" : "Amazon",
+                    "designation" : "Programe Manager"
+                }    */
+            ]
+            $scope.removeUsr = function(usrDet){
+                $scope.usr.splice($scope.usr.indexOf(usrDet), 1);
+            }
+            $scope.crUsr = function(currentUsr){
+              // console.log($scope.usr.push(nwusr));
+               $scope.usr.push(currentUsr);
+               delete $scope.currentUsr;
+            }
+            $scope.addusr = function(nwusr){
+                var s=[];
+                for(i in $scope.usr){
+                 s +=   $scope.usr[i].name + ", ";
+                }
+                //console.log(s);
+                var n = s.split(", ");
+                //console.log(n);
+             if(n.includes(nwusr.name) == false)
+             {
+                $scope.crUsr(nwusr);
+             }
+             else{
+                 alert("User name has already taken and updated the value");
+                $scope.uptUsr(nwusr);
+             }
+            }
+            $scope.uptUsr = function (currentUsr) {
+                for (var i = 0; i < $scope.usr.length; i++) {
+                if ($scope.usr[i].name == currentUsr.name) {
+                    console.log()
+                $scope.usr[i] = currentUsr;
+                break;
+                }
+            }
+            delete $scope.currentUsr;
+            angular.element(document.querySelector('#usrBtn')).val('add user');
+            }
+          $scope.editUsr = function(nwusr){
+          $scope.currentUsr=nwusr;
+          angular.element(document.querySelector('#usrBtn')).val('update user');
+          }
+        })
+        /* .config(function($routeProvider,$locationProvider){
+            $routeProvider
+            .when('/',{
+             templateUrl:'view.html'
+            })
+            .when('/view1',{
+             templateUrl:'view1.html'
+            })
+            .otherwise({
+                redirectTo:'/'
+            });
+            $locationProvider.hashPrefix('');
+        })
+        .controller('loginCtrl',function($scope, $location){
+            $scope.submit=function(){
+                 var sname=$scope.username;
+                 var psw=$scope.password;
+             if(sname == 'admin' && psw == 'admin'){
+              $location.path("/view1");
+             }
+             else{
+                 alert('error');
+             }
+             
+            } 
+        })*/
+        
+    </script>
+</head>
+<body ng-app="mainApp"> 
+    <!-- {{ 2 + 2 }} <br>
+    <div></div>
+    <div class="sam">
+        <input type="text" name="" id="" ng-model="name">
+         hello {{ name }}
+    </div>
+    <div ng-include="'samp.html'"></div> -->
+    <!-- <div ng-view=""></div> -->
+    <div ng-controller="jsnCtrl">
+        <input type="text" name="" id="" ng-model="searchText">
+        <div style="margin:10px">
+            <input type="button" value="order by name" ng-click="order = 'name'">
+            <input type="button" value="order by company" ng-click="order = 'company'">
+        </div>
+        <form action="" ><input type="text" ng-model="currentUsr.name">
+            <input type="text" ng-model="currentUsr.company">
+            <input type="text" ng-model="currentUsr.designation">
+            <input type="button" value="add user" ng-click="addusr(currentUsr)" ng-disabled="!currentUsr.name || !currentUsr.company || !currentUsr.designation" id="usrBtn"></form>
+    <ul>
+        <li ng-repeat="nwusr in usr | filter: searchText | orderBy: order" >{{ nwusr.name + ' work in ' + nwusr.company + ' and designation as ' + nwusr.designation }} <span ng-click="editUsr(nwusr)" class="edt">Edit</span> <span ng-click="removeUsr(nwusr)">&times</span></li>
+    </ul>
+    
+</div>
+    
+</body>
+</html>
