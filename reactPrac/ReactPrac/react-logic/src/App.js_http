@@ -1,0 +1,15 @@
+import "./App.css";
+import Movie from "./component/Http/Movie";
+function App() {
+  return (
+   <div className="container my-3">
+       <div className="row">
+        <div className="col-12">
+            <Movie />
+        </div>
+       </div>
+   </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,13 @@
+section div{
+    margin:10px 0px 0px;
+    
+}
+label{
+    float:left;
+    width:120px
+}
+.form{
+    width:320px;
+    margin: 10px auto 0px;
+    text-align: left;
+}

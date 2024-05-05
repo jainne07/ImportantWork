@@ -1,0 +1,12 @@
+ul.select{
+    list-style: none;
+    margin: 0px 0px;
+    padding: 0px;
+}
+ul.select li{
+    list-style: none;
+    background-color: darkgray;
+    padding: 10px;
+    margin:5px 0px;
+    cursor: pointer;
+}

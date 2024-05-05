@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  margin: 10px;
+}
+/* .active{
+  background-color:aliceblue !important;
+} */
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+}
+

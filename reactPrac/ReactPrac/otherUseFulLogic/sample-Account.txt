@@ -1,0 +1,17 @@
+class Account{
+    constructor(totalamount ){
+        this.totalamount=totalamount
+    }
+    debit(amount){
+        if(this.totalamount < amount){
+            return "Insufficient balance"
+        }
+        return this.totalamount=this.totalamount - amount  
+    }
+    credit(amount){
+        return this.totalamount=this.totalamount + amount  
+    }
+    getBalance(){
+        return this.totalamount;
+    }
+}

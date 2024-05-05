@@ -1,0 +1,24 @@
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Homepage from "./component/routerRel/Homepage";
+import Product from "./component/routerRel/Product";
+import RootLayout from "./component/routerRel/Root";
+import ProductDetail from "./component/routerRel/ProductDetail";
+import Error from './component/routerRel/Error'
+function App() {
+  const route = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <Error/>,
+      children: [
+        { path: "/", element: <Homepage /> },
+        { path: "/product", element: <Product /> },
+        { path: "/product/:productId", element: <ProductDetail/> },
+      ],
+    },
+  ]);
+  return <RouterProvider router={route} />;
+}
+
+export default App;

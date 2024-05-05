@@ -1,0 +1,106 @@
+import { fireEvent, render, screen,configure } from '@testing-library/react';
+import App from './App';
+
+xdescribe('Check basic App test cases',()=>{
+  configure({testIdAttribute: 'id'})
+  //getbytest
+  test('renders learn react link', () => {
+    render(<App />);
+    const linkElement = screen.getByText(/learn test cases/i);
+    expect(linkElement).toBeInTheDocument();
+  });
+  //getByDisplayValue
+  test('renders display value', () => {
+    render(<App />);
+    const input = screen.getByDisplayValue("enter data");
+    expect(input).toBeInTheDocument();
+  });
+  test('renders display value option', () => {
+    render(<App />);
+    const input = screen.getByDisplayValue("Apples");
+    expect(input).toBeInTheDocument();
+  });
+//getByTitle
+test('renders title', () => {
+  render(<App />);
+  const img = screen.getByTitle("hello");
+  expect(img).toBeInTheDocument();
+});
+//getByTestId
+test('renders testid', () => {
+  render(<App />);
+  const img = screen.getByTestId("custom-v");
+  expect(img).toBeInTheDocument();
+});
+//getbyAlttext
+test('renders image alt', () => {
+  render(<App />);
+  const img = screen.getByAltText("flower_image");
+  expect(img).toBeInTheDocument();
+});
+
+  test('renders click event', () => {
+    render(<App />);
+    const btn=screen.queryByRole('button')
+    fireEvent.click(btn)
+    expect(screen.getByText(/hello click this/i)).toBeInTheDocument();
+  });
+ 
+  test('renders onchange event', () => {
+    render(<App />);
+    const input=screen.getByRole('textbox',{name: "Data"})
+    fireEvent.change(input,{target:{value: "abc"}})
+    expect(input.value).toBe("abc");
+  });
+//Get by role
+test('renders heading 1', () => {
+  render(<App />);
+  //const heading=screen.getByRole('heading',{name: "learn test cases"})
+  const heading=screen.getByRole('heading',{level: 3})
+  expect(heading).toBeInTheDocument();
+});
+  test('renders input event', () => {
+    render(<App />);
+    const input=screen.getByRole('textbox',{name: "Data"})
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute("name","data")
+    expect(input).toHaveAttribute("value","enter data")
+  });
+  test('renders input data', () => {
+    render(<App />);
+    const input=screen.getByRole('textbox',{name: "Firstname"})
+    expect(input).toBeInTheDocument();
+  });
+  test('renders select event', () => {
+    render(<App />);
+    const select=screen.getByRole('combobox')
+    expect(select).toBeInTheDocument();
+  });
+  test('renders checkbox event', () => {
+    render(<App />);
+    const checkbox=screen.getByRole('checkbox')
+    expect(checkbox).toBeInTheDocument();
+    expect(checkbox).toBeChecked()
+  });
+  // test('renders getByAllrole event', () => {
+  //   render(<App />);
+  //   const select=screen.getAllByRole('option')
+  //   for(let i=0; i<select.length; i++){
+  //     expect(select[i]).toBeInTheDocument();
+  //   }
+  // });
+ //getByLabelText
+ test('renders input label', () => {
+  render(<App />);
+  const name=screen.getByLabelText("Firstname")
+  expect(name).toBeInTheDocument();
+});
+//getByPlaceholderText
+test('renders input placeholder', () => {
+  render(<App />);
+  const name=screen.getByPlaceholderText("please enter name")
+  expect(name).toBeInTheDocument();
+});
+})
+
+

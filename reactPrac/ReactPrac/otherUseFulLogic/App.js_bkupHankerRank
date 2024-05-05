@@ -1,0 +1,40 @@
+import React, { Component } from 'react';
+import './App.css';
+
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+         country: '',
+         language:''
+    }
+}
+  country =["Poland", "India","USA"]
+  language=["English","Spanish", "Hindi"]
+  changeHandler = (identifier, value) => {
+    this.setState( {[identifier]: value }
+    );
+  };
+  render() {
+    return (
+      <div className="App">
+        <h1>Hello react</h1>
+        <select onChange={(event) => this.changeHandler("country", event.target.value)}>
+         {this.country.map(item=>
+          <option value={item} key={item}>{item}</option>
+          )}
+        </select>
+        <select onChange={(event) => this.changeHandler("language", event.target.value)}>
+         {this.language.map(item=>
+          <option value={item} key={item}>{item}</option>
+          )}
+        </select>
+
+        <label>Selected Country: {this.state.country}</label>
+        <label>Selected Language: {this.state.language}</label>
+      </div>
+    );
+  }
+}
+
+export default App;

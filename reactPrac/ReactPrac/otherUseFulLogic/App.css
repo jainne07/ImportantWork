@@ -1,0 +1,18 @@
+p{
+  padding: 0px 0px;
+}
+.box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+span{
+height: 100px;
+flex: 0 0 33%;
+margin: 20px 0px;
+}
+span img{
+ margin: 0px auto;
+ display: block;
+}
+

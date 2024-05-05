@@ -1,0 +1,10 @@
+{
+  "cart": [
+    {
+      "id": "p1",
+      "price": 6,
+      "title": "My First Book",
+      "description": "The first book I ever wrote"
+    }
+  ]
+}

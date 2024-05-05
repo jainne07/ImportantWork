@@ -1,0 +1,23 @@
+import Counter from "./component/Redux/Counter";
+import Auth from "./component/Redux/Auth";
+import { useSelector } from "react-redux";
+import UserProfile from "./component/Redux/UserProfile";
+import Header from "./component/Redux/Header";
+
+export default function App() {
+  const isAuth = useSelector(state => state.auth.isAuthenticated);
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <Header/>
+          <h3>Learn redux</h3>
+         { !isAuth && <Auth />}
+         { isAuth && <UserProfile />}
+         <Counter />
+        </div>
+      </div>
+    </div>
+  );
+}

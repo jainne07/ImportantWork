@@ -1,0 +1,14 @@
+import "./App.css";
+import Main from "./component/useContextEx/Main"
+import ProjectContextProvider from "./component/useContextEx/store/project";
+function App() {
+  return (
+    <div className="App">
+      <ProjectContextProvider>
+        <Main/>
+      </ProjectContextProvider>
+    </div>
+  );
+}
+
+export default App;

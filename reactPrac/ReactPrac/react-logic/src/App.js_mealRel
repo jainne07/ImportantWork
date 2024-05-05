@@ -1,0 +1,32 @@
+import "./App.css";
+import {useState, useRef} from 'react'
+import Modal from './component/MealRel/Modal'
+import Header from './component/MealRel/Header'
+import Meal from './component/MealRel/Meal'
+import CartContextProvider from "./component/MealRel/store.js/cartContext";
+function App() {
+  const [showMod,setShowMod] =useState(false)
+  const [checkout, setCheckout]=useState(false)
+  const dialog=useRef();
+  const handleClick = () => {
+    setShowMod(true)
+    dialog.current.showModal();
+  };
+  const closeClick = () => {
+    setShowMod(false)
+    dialog.current.close();
+  };
+  const cartShow=(data)=>{
+     console.log(data)
+     setCheckout(data)
+  }
+  return (
+    <CartContextProvider>
+       <Header onOpen={handleClick}/>
+       <Meal/>
+      <Modal ref={dialog} onSelect={closeClick} show={showMod} onCheck={cartShow} checkout={checkout}/>
+    </CartContextProvider>
+  );
+}
+
+export default App;

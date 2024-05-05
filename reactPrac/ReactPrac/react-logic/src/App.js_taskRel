@@ -1,0 +1,110 @@
+import "./App.css";
+import React, { useState } from "react";
+import Sidebar from "./component/taskRel/Sidebar";
+import NoProject from "./component/taskRel/NoProject";
+import NewProject from "./component/taskRel/NewProject";
+import SelectedProj from "./component/taskRel/SelectedProj";
+
+function App() {
+  const [selectProj, SetSelectProj] = useState({
+    selectedProjectId: undefined,
+    projects: [],
+    task: []
+  });
+  function createProj() {
+    SetSelectProj((prevState) => {
+      return { ...prevState, selectedProjectId: null };
+    });
+  }
+  function cancelProj() {
+    SetSelectProj((prevState) => {
+      return { ...prevState, selectedProjectId: undefined };
+    });
+  }
+  function selected(id) {
+    SetSelectProj((prevState) => {
+      return { ...prevState, selectedProjectId: id };
+    });
+  }
+  function handleDelete(id) {
+    SetSelectProj((prevState) => {
+      return {
+        ...prevState,
+        task: selectProj.task.filter(
+          (task) => task.id !== id
+        ),
+      };
+    });
+  }
+  function deleteproj() {
+    SetSelectProj((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: selectProj.projects.filter(
+          (project) => project.id !== selectProj.selectedProjectId
+        ),
+      };
+    });
+  }
+  function addProj(newProj) {
+    SetSelectProj((prevState) => {
+      const projectId = Math.random();
+      const newProject = {
+        ...newProj,
+        id: projectId,
+      };
+
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: [...prevState.projects, newProject],
+      };
+    });
+  }
+  function handleTask(newTask) {
+    SetSelectProj((prevState) => {
+      const id = Math.random();
+      const newTasks = {
+        ...newTask,
+        projectId: selectProj.selectedProjectId,
+        id: id,
+      };
+
+      return {
+        ...prevState,
+        task: [...prevState.task, newTasks],
+      };
+    });
+  }
+  let selectedProject = selectProj.projects.find(
+    (proj) => proj.id === selectProj.selectedProjectId
+  );
+  let content = (
+    <SelectedProj
+      project={selectedProject}
+      onCancel={cancelProj}
+      onDelete={deleteproj}
+      addTask={handleTask}
+      deleteTask={handleDelete}
+      task={selectProj.task}
+    />
+  );
+  if (selectProj.selectedProjectId === null) {
+    content = <NewProject onCancel={cancelProj} onAdd={addProj} />;
+  } else if (selectProj.selectedProjectId === undefined) {
+    content = <NoProject onCreate={createProj} />;
+  }
+  return (
+    <div className="App">
+      <Sidebar
+        onCreate={createProj}
+        projects={selectProj.projects}
+        onSelect={selected}
+      />
+      {content}
+    </div>
+  );
+}
+
+export default App;
