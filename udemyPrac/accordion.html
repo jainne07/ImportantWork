@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      ul {
+        list-style: none;
+      }
+      li {
+        display: inline-block;
+        width: 100px;
+        padding: 10px;
+        margin: 0px 10px;
+        text-align: center;
+        background-color: aqua;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tab">
+      <div id="content"></div>
+    </div>
+    
+
+    <script>
+      let itemTitle=''
+      const tab = [
+        {
+          title: "react",
+          content: "React is powerful tool",
+        },
+        {
+          title: "mac",
+          content: "Mac is powerful tool",
+        },
+        {
+          title: "java",
+          content: "Java is powerful tool",
+        },
+      ];
+      function tabData() {
+        let data = "";
+        data += "<ul>";
+        let check = tab.map((item) => {
+          data += `<li onclick='check(this)'>${item.title}</li> `;
+          data += `<p>${itemTitle === item.title ? item.content : ''}</p>`
+        });
+        data += "</ul>";
+        //console.log(data)
+        document.getElementById("tab").innerHTML = data;
+      }
+      function check(itm) {
+        console.log(itm.textContent)
+        itemTitle=itm.textContent
+        return (
+          itemTitle,
+          tabData()
+        )
+
+        // let check = tab.filter((item) => item.title == itm.textContent);
+        // console.log(check[0].content);
+        // let data = check[0].content;
+        //document.getElementById("content").innerHTML = data;
+      }
+      tabData();
+    </script>
+  </body>
+</html>

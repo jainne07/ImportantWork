@@ -1,0 +1,23 @@
+  class NotesStore {
+        constructor(data = []) {
+          this.data = data;
+        }
+        addNote(name, state) {
+          const stateData = ["active", "completed", "others"];
+          if (name === "") {
+            return "Name cannot be empty";
+          }
+          if (!stateData.includes(state)) {
+            return "Invalid State{" + state + "}";
+          }
+          return this.data.push({ name: name, state: state });
+        }
+        getNotes(curState) {
+          const stateData = ["active", "completed", "others"];
+          if (!stateData.includes(curState)) {
+            return "Invalid State{" + curState + "}";
+          }
+          let checkState = this.data.filter((item) => item.state === curState);
+          return checkState;
+        }
+      }
