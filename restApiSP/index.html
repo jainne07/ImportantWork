@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .details{
+            background-color:honeydew;
+            padding: 10px;
+            margin:10px
+        }
+        body{
+            font:14px tahoma;
+        }
+    h1{
+        text-transform: capitalize;
+        margin:0px 0px;
+    }
+    small{
+        color:midnightblue;
+        margin:0px 0px;
+    }
+    form{
+        background-color: lavenderblush;
+        width:380px;
+        margin:0px auto;
+        padding: 10px 20px;
+    }
+    .w50{
+        width:50%;
+        float:left;margin:0px 0px 10px
+    }
+    .btnWd{
+        padding: 10px 0px;
+            margin: 21px auto 0px;
+            width: 100%;
+            text-align: center;
+            clear: both;
+    }
+    </style>
+    
+</head>
+<body>
+    <div style="display:block" id="addForm">
+        <form action="" onsubmit="submitForm(event)">
+            <div class="w50"><label>Title</label><br><input type="text"  name="title" /></div>
+            <div class="w50"><label>Body</label><br><textarea name="body" rows="2" cols="20"></textarea></div>
+            <div class="btnWd"><input type="submit" value="Add Post"></div>
+        </form>
+    </div>
+    <div style="display: none;" id="updForm">
+        <form action="" onsubmit="updateForm(event)">
+          <div id="updFormDet"></div>
+          <div class="btnWd"><input type="submit" value="Update Post"></div>
+        </form>
+    </div>
+
+    <div id="posts"></div>
+</body>
+<script>
+    fetch('http://localhost:3000/posts')
+    .then(resp=>resp.json())
+    .then(data => 
+    {
+        console.log(data)
+        let dataDet='';
+    data.forEach(post=>{
+     dataDet+=`
+     <div class="details">
+     <h1>${post.title}</h1>
+     <small>${post.likes}</small>
+     <p>${post.body.slice(0,100)}...</p>
+     <div><button onclick="deleteBtn(${post.id})" class="del" >Delete</button> <button onclick="updateValue(${post.id})" class="del" >Edit</button></div>
+     </div>
+     `
+ })
+    document.getElementById('posts').innerHTML = dataDet;
+    })
+    .catch(err=>console.log(err))
+    const deleteBtn=(id)=>{
+        fetch('http://localhost:3000/posts/'+id,{
+           method:'DELETE'
+        })
+    }
+    
+    const submitForm=(e)=>{
+        e.preventDefault();
+        console.log("submit");
+        const form=document.getElementsByTagName('form')[0];
+      const usrData={
+        title:form.title.value,
+        body:form.body.value,
+        likes:0,
+      }
+      //console.log(JSON.stringify(usrData))
+      fetch('http://localhost:3000/posts',{
+        method:'POST',
+        body: JSON.stringify(usrData),
+        headers: {'Content-Type': 'application/json'}
+    }) 
+    form.reset()
+    }
+    const updateValue=(id)=>{
+      console.log(id);
+      document.getElementById('updForm').style.display="block";
+      document.getElementById('addForm').style.display="none";
+      fetch('http://localhost:3000/posts/'+id)
+      .then(resp=>resp.json())
+      .then(data=>{
+          //console.log(data)
+          let dataDet='';
+     dataDet+=`
+     <div class="w50"><input type="text" name="id" disabled value='${data.id}' /></div>
+     <div class="w50"><input type="text"  name="title" value='${data.title}' /></div>
+     <div class="w50"><textarea rows="2" name="body" cols="20">${data.body}</textarea></div>
+     <div class="w50"><input type="text"  name="likes" value='${data.likes}' /></div>
+     `
+ document.getElementById('updFormDet').innerHTML=dataDet;
+        })
+    }
+    const updateForm=(e)=>{
+        e.preventDefault();
+        console.log("submit");
+        const form=document.getElementsByTagName('form')[1];
+        let id=form.id.value
+      const usrData={
+        id:form.id.value,
+        title:form.title.value,
+        body:form.body.value,
+        likes:form.likes.value,
+      }
+      console.log(usrData)
+      fetch('http://localhost:3000/posts/'+id,{
+        method:'PUT',
+        body: JSON.stringify(usrData),
+        headers: {'Content-Type': 'application/json'}
+    }) 
+    //form.reset();
+    } 
+</script>
+</html>
