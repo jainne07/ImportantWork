@@ -1,0 +1,101 @@
+<p>observ-subs works!</p>
+<!--Merge map , switch map, concat map-->
+<ul id="mergeCnt" class="container"></ul>
+<ul id="concatCnt" class="container"></ul>
+<ul id="switchCnt" class="container"></ul>
+<ul id="exhaustCnt" class="container"></ul>
+<!--combine latest, withLatestFrom, Zip and fork join-->
+<div>
+        <select #selName>
+                <option *ngFor="let name of names" [value]="name">
+                      {{name}}
+                    </option>
+              </select>
+</div>
+<div class="py" #selColor>
+        <select #selName>
+                <option *ngFor="let color of colors" [value]="color">
+                      {{color}}
+                    </option>
+              </select>
+
+          <div id="combinelatest">
+        <h2>combinelatest</h2>
+    </div>
+          <div id="latestfrom">
+        <h2>latestfrom</h2>
+    </div>
+          <div id="zip">
+        <h2>zip</h2>
+    </div>
+          <div id="forkjoin"></div>
+</div>
+<!--From event example-->
+<button #addBtn type="submit">Click</button>
+
+<ul id="myContainer" class="container"></ul>
+<!-- {{obMsg}} -->
+<!--From interval example-->
+<ul id="intervalCont" class="container"></ul>
+<!--of observable-->
+<ul id="ofContainer" class="container"></ul>
+<!-- {{arr}} -->
+
+<ul class="container">
+        <li *ngFor="let data of arr">{{data}}</li>
+</ul>
+<!--object binding-->
+<div *ngFor="let item of obj1 | keyvalue">
+        {{ item.key }} - {{ item.value }}
+      </div>
+ 
+<!--from observable-->
+ 
+<!--from convert array to string-->
+  <ul id="fromCnt" class="container"></ul>
+ 
+<!--string to observable-->
+  <ul id="fromCnt1" class="container"></ul>
+ 
+<!-- {{arr1}} -->
+  <ul class="container">
+        <li *ngFor="let vid of arr1">{{vid}}</li>
+</ul>
+<!--arr2-->
+<ul class="container">
+        <li *ngFor="let user of arr2">{{user}}</li>
+</ul>
+<ul class="container">
+        <li *ngFor="let mobile of arr3">{{mobile}}</li>
+</ul>
+<!--input debounce and distinct-->
+<input type="text" #name>
+<div>{{resData}}</div>
+<!--concat merge and concat-->
+<ul class="container">
+        <li *ngFor="let vidC of vidConct">{{vidC}}</li>
+</ul>
+<!--switchmap using api-->
+<form #searchform="ngForm">
+      <label for="">Searching courses</label>
+      <input type="text" name="searchterm" #searchterm="ngModel" ngModel required>
+</form>
+
+  <div *ngFor="let video of resDataNew, index as i">
+        <h5>{{i+1}} - {{video.title}} <button (click)="delete(video.id)">Delete</button></h5>
+        <p>{{video.description}} </p>
+</div>
+<!-- <button (click)="addInfo()">Add new Info</button> -->
+<h1>Post information</h1>
+<form #dataPost="ngForm" (ngSubmit)="addInfo(dataPost.value)">
+    <div><input type="text" name="id" #id="ngModel" min="21" ngModel required></div>
+        <span *ngIf="id.invalid && id.touched" [style.color]="'red'">Please minium no 21</span>
+        <div><input type="url" name="thumb" pattern="https://.*" #thumb="ngModel" ngModel required></div>
+      <span *ngIf="thumb.invalid && thumb.touched" [style.color]="'red'">Please valid img url</span>
+    <div><input type="text" name="title" #title="ngModel" min="21" ngModel required></div>
+    <span *ngIf="title.invalid && title.touched" [style.color]="'red'">Please minium no 21</span>
+     
+      <div><input type="text" name="description" #description="ngModel" ngModel required></div>
+      <span *ngIf="description.invalid && description.touched" [style.color]="'red'">Please enter description</span>
+        <div><input type="submit" value="submit" [disabled]="!dataPost.valid"></div>
+</form>

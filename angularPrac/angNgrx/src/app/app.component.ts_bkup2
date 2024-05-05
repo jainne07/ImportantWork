@@ -1,0 +1,58 @@
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import { CockpitComponent } from './cockpit/cockpit.component';
+import { ServerService } from './server.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  //encapsulation: ViewEncapsulation.None
+})
+export class AppComponent implements OnInit{
+  server: any;
+  constructor(private serverSer:ServerService) { }
+
+  ngOnInit(): void {
+   this.server=this.serverSer.servers
+  }
+
+  //@ViewChild(CockpitComponent) cockpit!: CockpitComponent;
+//   title = 'Angular practice';
+//   servers: any = [
+//     { type: 'server', name: 'test server', content: 'Just server' },
+//     { type: 'blueprint', name: 'test blueprint', content: 'Just blueprint' },
+//   ];
+//  onAddServer(data: any) {
+//    this.servers.push({
+//     type: 'server',
+//     name: data.name,
+//     content: data.content
+//   })
+//   }
+  
+//   onAddBlueprint(data:any) {
+//     this.servers.push({
+//       type: 'blueprint',
+//       name: data.name,
+//       content: data.content
+//     })
+//   }
+ 
+  // onAddServer() {
+  //   this.cockpit.onaddServer();
+  //   const chk=this.cockpit.serverElements[this.cockpit.serverElements.length - 1]
+  //   this.servers = [...this.servers, chk];
+  // }
+  // onAddBlueprint() {
+  //   this.cockpit.onaddBlue();
+  //   const chk=this.cockpit.serverElements[this.cockpit.serverElements.length - 1]
+  //   this.servers = [...this.servers, chk];
+  // }
+}

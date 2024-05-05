@@ -1,0 +1,17 @@
+<ul class="list-group">
+    <!-- <a class="list-group-item list-group-item-action" (click)="selected()"> -->
+          <a class="list-group-item list-group-item-action" [routerLink]="[index]">
+      <div class="float-right">
+        <img
+          [src]="recipe.image"
+          [alt]="recipe.image"
+          class="img-fluid"
+          style="max-width: 80px"
+        />
+      </div>
+      <div class="float-left">
+        <h4>{{ recipe.name }}</h4>
+        {{ recipe.description }}
+      </div>
+    </a>
+</ul>

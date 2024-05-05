@@ -1,0 +1,5 @@
+<ng-content></ng-content>
+<p>todo-list works!</p>
+<div><input type="text" #box [value]="box.value"></div>
+<button (click)="addTask(box.value); box.value=''">Add Task</button>
+<div *ngFor="let item of list">{{item.id+1}}-{{item.task}} <button (click)="removeTask(item.id)">X</button></div>

@@ -1,0 +1,59 @@
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+import { ChildComponent } from './child/child.component';
+import { DataserviceService } from './dataservice.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+})
+export class AppComponent implements OnInit, AfterViewInit {
+  constructor(private cd: ChangeDetectorRef, private data: DataserviceService) {}
+  title = 'angularBasic';
+  counter: any;
+
+  @ViewChild('childView') child!: ChildComponent;
+  @ViewChild('highlight') highlight!: ElementRef;
+  @ViewChildren('highlight') highlights!: QueryList<any>;
+  //@ViewChild(ChildComponent) child: any;
+  message: any;
+
+
+  ngOnInit(): void {
+    //this.message='hello World'
+    this.data.currentMessage.subscribe(message => this.message = message)
+  }
+  ngAfterViewChecked(): void {
+    this.cd.detectChanges();
+  }
+  ngAfterViewInit(): void {
+   // this.message = this.child.message;
+  //  this.counter=this.child.counter;
+  //  this.highlight.nativeElement.style.color="red"
+  //  console.log(this.highlight.nativeElement);
+  //  console.log(this.highlights);
+  //  let divList: any[];
+  //  divList = this.highlights.map(x => x);  
+  //  console.log(divList[1]);  
+  //  divList[1].nativeElement.style.color="orange"
+  }
+  // recieveData(e: string) {
+  //   this.message = e;
+  // }
+
+  // increment(){
+  //   this.child.inc();
+  // }
+  // decrement(){
+  //   this.child.dec();
+  // }
+}

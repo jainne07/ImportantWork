@@ -1,0 +1,9 @@
+<form (ngSubmit)="addCust()" #signup="ngForm">
+    <input type="text" name="customer" id="" ngModel>
+    <button>Add customer</button>
+</form>
+<ul *ngIf="show || customers.length<0">
+    <li *ngFor="let cust of customers">{{cust}}</li>
+</ul>
+<input type="text" [defaultValue]="show">
+<input type="text" value="show">

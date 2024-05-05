@@ -1,0 +1,9 @@
+<p><b>Template form</b></p> 
+<form #bsFrom="ngForm" (ngSubmit)="getData(bsFrom.value)"> 
+<div><input type="text" name="user" #user="ngModel" ngModel required ></div> 
+<span *ngIf="user.invalid && user.touched" [style.color]="'red'">Please enter name</span> 
+<div><input type="text" name="email" #email="ngModel" ngModel email required></div> 
+<span *ngIf="email.invalid && email.touched" [style.color]="'red'">Please enter email</span> 
+<div><input type="submit" value="submit" [disabled]="!bsFrom.valid"></div> 
+</form> 
+<div id="user-data">{{userData | json}}</div> 

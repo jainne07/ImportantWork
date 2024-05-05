@@ -1,0 +1,9 @@
+<app-shopping-edit></app-shopping-edit>
+<ul class="list-group" *ngFor="let ing of ingredient, let i = index" >
+  <li class="list-group-item" style="cursor:pointer" (click)="onEdit(i)">
+    <h6 class="text-secondary">
+      {{ ing.name }}
+      <span class="badge badge-pill badge-secondary float-right">{{ ing.amount }}</span>
+    </h6>
+  </li>
+</ul>

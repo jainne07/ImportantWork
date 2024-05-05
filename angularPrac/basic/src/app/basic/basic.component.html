@@ -1,0 +1,65 @@
+<p>basic works!</p>
+
+    <h1 class="text-black">{{title}}</h1>
+        <h4 [class]="bluTxt">{{data}}</h4>
+       
+<!-- //style color -->
+        <h3 [style.color]="'lightblue'">Style binding</h3>
+        <h3 [style.color]="hasError ? 'Crimson':'MediumAquaMarine'">Style binding Ex2</h3>
+        <h3 [style]="highlight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque molestias quasi porro
+    labore iste incidunt fuga. Incidunt molestias necessitatibus exercitationem sequi debitis nostrum.</h3>
+       
+<!-- //class binding -->
+        <p [class.text-red]="hasError">It has error</p>
+        <p [class]="message">It has error</p>
+       
+<!-- //property binding -->
+        <input type="text" name="" [id]="myid" value={{myid}}>
+        <input type="text" name="" id={{myid}} value={{myid}} [disabled]="true">
+       
+<!-- //event  -->
+        <div [style.padding]="'10px'">
+                <button (click)="onclick()" id="greet">Greet</button>
+                <div id="welc">{{welcome}}</div>
+            </div>
+       
+<!-- Ref value -->
+        <input type="text" name="" id="" #myinput>
+        <button (click)="logDet(myinput.value)">Click here</button>
+       
+<!-- Two-way binding -->
+        <div>
+                <input type="text" [(ngModel)]="name">
+                {{name}}
+            </div>
+       
+<!-- directive -->
+        <h1 appRedEle>Welcome Directive</h1>
+       
+<!-- <h1 *ngIf="false">Welcome to ngif Directive</h1> -->
+     <h1 *ngIf="dispNm;">Ngif Directive</h1>
+       
+<!-- <h1 *ngIf="dispNm; else elseBlk" >Ngif Directive</h1> 
+        <ng-template #elseBlk> 
+            <h2>welcome else block</h2> 
+        </ng-template> -->
+        <button (click)="dispTog()">toggle</button>
+   
+        <h1 *ngIf="dispBlk; then blk; else elseBlk">Ngif Directive</h1>
+        <ng-template #blk>
+                <h2>Welcome Angular</h2>
+            </ng-template>
+        <ng-template #elseBlk>
+                <h2>welcome block</h2>
+            </ng-template>
+       
+<!-- ngSwitch -->
+        <div [ngSwitch]="colorPick">
+                <div *ngSwitchCase="'red'" [style.color]="'red'">You have picked red</div>
+                <div *ngSwitchCase="'blue'" [style.color]="'blue'">You have picked blue</div>
+                <div *ngSwitchCase="'green'" [style.color]="'green'">You have picked </div>
+                <div *ngSwitchDefault [style.color]="'black'">You have picked black</div>
+            </div>
+       
+<!--ngfor-->
+        <div *ngFor="let colors of colorType; even as e">{{e}} - {{colors}}</div>

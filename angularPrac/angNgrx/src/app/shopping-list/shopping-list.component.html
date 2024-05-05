@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <app-shopping-edit></app-shopping-edit>
+        <!-- <app-shopping-edit (ingreAdd)="addIngre($event)"></app-shopping-edit> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="list-group" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of (ingredients | async)!.ingredients; let i = index" (click)="onEdit(i)" style="cursor: pointer;">
+                {{item.name}}
+                <span class="badge badge-primary badge-pill" 
+                >{{item.amount}}</span>
+              </li>
+             </ul>
+      </div>
+    </div>
+</div>

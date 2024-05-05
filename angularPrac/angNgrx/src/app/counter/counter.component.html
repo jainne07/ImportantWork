@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">{{ count$ | async }}</div>
+    <div class="col-sm-12">{{ double$ | async }}</div>
+    <div class="col-sm-12">
+      <button class="btn btn-secondary" (click)="increment()">increment</button>
+      <button class="btn btn-secondary mx-2" (click)="decrement()">decrement</button>
+    </div>
+  </div>
+</div>

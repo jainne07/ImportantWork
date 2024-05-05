@@ -1,0 +1,127 @@
+<button (click)="increment()" id="btn-incr">Increment</button>
+<button (click)="decrement()">Decrement</button>
+<h1>{{ counter }}</h1>
+<p id="title">{{ title }}</p>
+<input type="text" name="" id="user" [disabled]="userread" />
+<p id="header" [ngClass]="num > 10 ? 'font-blue' : 'font-red'">
+  check the number is greater than 10
+</p>
+<p id="styleChk" [ngStyle]="{ color: num > 10 ? 'black' : 'yellow' }">
+  Check the style
+</p>
+<table>
+  <thead>
+    <tr>
+      <th [attr.colspan]="colspanTable" id="tableData">Student</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let post of posts">
+    <td>{{ post.id }}</td>
+    <td>{{ post.title }}</td>
+    <td>{{ post.body }}</td>
+  </tr>
+</table>
+<div>
+  <button id="btn1" (click)="btn1()">click</button>
+  <button id="btn2" (click)="btn2()">click button two</button>
+  <input type="text" id="changeInput" (input)="inputChng()" />
+  <input type="text" id="chngInt" (input)="inputChngEvt($event)" />
+</div>
+{{ label }}
+
+<div><input type="text" [(ngModel)]="username" id="name" /> {{ username }}</div>
+<div><button id="usernm" (click)="setName()">Click change name</button></div>
+<div *ngIf="num > 20" id="div1">Number is greater than 20</div>
+<div *ngIf="num < 20" id="div2">Number is less than 20</div>
+<div *ngIf="num < 20; then truetemp; else falsetemp" id="div3"></div>
+<ng-template #truetemp
+  ><p id="ng1">Number is less than 20 using ng-temp</p></ng-template
+>
+<ng-template #falsetemp
+  ><p id="ng2">Number is greater than 20 using ng-temp</p></ng-template
+>
+<div [ngSwitch]="selectMed" id="switch">
+  <div *ngSwitchCase="'one'">One is selected</div>
+  <div *ngSwitchCase="'two'">Two is selected</div>
+  <div *ngSwitchDefault>This is default</div>
+</div>
+<div *ngFor="let color of colorList" id="colorListName">
+  <p [ngStyle]="{ background: color }">{{ color }}</p>
+</div>
+<div *ngFor="let user of userList" id="userListName">
+  <p>{{ user.id }}- {{ user.name }}</p>
+</div>
+{{ title | uppercase }}
+{{ title | lowercase }}
+{{ size | filesize }}
+{{ size | filesize : "GB" }}
+<app-check
+  [message]="parentMessage"
+  (outputData)="recieved($event)"
+></app-check>
+<p>{{ recievedData }}</p>
+<h1>Template driven model</h1>
+<form (ngSubmit)="submitHandle()" #login="ngForm">
+  <div>
+    <label for="firstname">Name </label>
+    <input
+      type="text"
+      #firstname="ngModel"
+      id="firstname"
+      name="firstname"
+      ngModel
+      required
+    />
+    <span *ngIf="firstname.invalid && firstname.touched" [style.color]="'red'"
+      >Please enter name</span
+    >
+  </div>
+  <div>
+    <label for="password">Password </label>
+    <input
+      type="password"
+      #password="ngModel"
+      ngModel
+      id="password"
+      name="password"
+      pattern="([0-9a-zA-Z]{5,})"
+      required
+    />
+    <span *ngIf="password.invalid && password.touched" [style.color]="'red'"
+      >Please enter password more than 4 length</span
+    >
+  </div>
+  <button [disabled]="!login.valid" type="submit">Submit</button>
+</form>
+<h2>Reactive form</h2>
+<form (ngSubmit)="submitReactive()" [formGroup]="signupForm">
+  <div>
+    <label for="first">Name </label>
+    <input
+      type="text"
+      formControlName="first"
+      id="first"
+      name="first"
+      required
+    />
+    <span *ngIf="signupForm.get('first')?.invalid && signupForm.get('first')?.touched" [style.color]="'red'"
+      >Please enter name</span
+    >
+  </div>
+  
+  <div>
+    <label for="paswrd">Password </label>
+    <input
+      type="password"
+      formControlName="paswrd"
+      id="paswrd"
+      name="paswrd"
+      required
+    />
+    <span *ngIf="signupForm.get('paswrd')?.invalid && signupForm.get('paswrd')?.touched" [style.color]="'red'"
+      >Please enter password</span
+    >
+  </div>
+  <button [disabled]="!signupForm.valid">Submit</button>
+</form>
+<router-outlet></router-outlet>

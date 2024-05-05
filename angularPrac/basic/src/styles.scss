@@ -1,0 +1,53 @@
+$fontFamily: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+$padten: 10px; 
+$textCntr: center; 
+$disBlk: block; 
+body,.app { 
+text-align: $textCntr; 
+font-family: $fontFamily;
+} 
+div { 
+padding: $padten; 
+}
+h1,h2,h3,h4,h5,h6 { 
+font-family: $fontFamily; 
+text-align: $textCntr; 
+} 
+$colors: red, LightSeaGreen, blue,black; 
+@each $color in $colors { 
+.text-#{$color} { 
+color:$color 
+} 
+} 
+nav { 
+ul { 
+margin: 0; 
+padding: 0; 
+list-style: none; 
+} 
+li { 
+display: inline-block; 
+} 
+a { 
+display: $disBlk; 
+padding: 6px 12px; 
+text-decoration: none; 
+color:#000 
+} 
+} 
+$colorsNew: LightGreen, MediumPurple, LightBlue,IndianRed; 
+ 
+@each $colornw in $colorsNew { 
+.#{$colornw} { 
+background-color: $colornw; 
+color:#000; 
+padding:10px; 
+float:left; 
+margin:10px 
+} 
+} 
+label{ 
+display: $disBlk; 
+font-weight: bold; 
+} 
+ 

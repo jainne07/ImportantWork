@@ -1,0 +1,19 @@
+<div class="app">
+    <nav> 
+          <ul> 
+            <li><a routerLink="/prac" queryParamsHandling="merge" [queryParams]="{'parentData':nameChild}">Practice</a></li> 
+            <li><a routerLink="/employee-list" routerLinkActive="active">Employee list</a></li> 
+            <li><a routerLink="/employee-details" routerLinkActive="active">Employee details</a></li> 
+            <li><a routerLink="/todo-list" routerLinkActive="active">Todo task</a></li> 
+            <li><a routerLink="/basic-form" routerLinkActive="active">Basic form</a></li> 
+            <li><a routerLink="/basic-bind" routerLinkActive="active">Basic Binding</a></li> 
+            <li><a routerLink="/reactive-form" routerLinkActive="active">Reactive Form</a></li> 
+            <li><a routerLink="/obsrv" routerLinkActive="active">Observable/subscribe</a></li> 
+          </ul> 
+        </nav> 
+        <div *ngIf="hasRoute('basic-bind')"> 
+            <app-todo-list><h4>Todo list Parent Call</h4></app-todo-list>  
+          </div> 
+      
+</div>
+<router-outlet></router-outlet>

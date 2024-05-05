@@ -1,0 +1,46 @@
+<h2>{{title}}</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam autem quibusdam, asperiores aliquid officia nemo saepe tenetur provident vero quae accusantium fugit dignissimos natus qui ratione nam!</p>
+<app-child></app-child>
+<app-child-new></app-child-new>
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
+        <app-http-request></app-http-request>
+        <!-- <app-tem-driven></app-tem-driven> -->
+        <!-- <app-reactive-form></app-reactive-form> -->
+        <!-- <nav class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/servers" routerLinkActive="active">Servers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+          </li>
+        </nav>
+         -->
+        <!-- <app-new-server></app-new-server>
+        <hr/>
+        <app-server-status  *ngFor="let ser of server; let i = index" [account]="ser" [id]="i"></app-server-status> -->
+          <!-- <app-cockpit (serverAdd)="onAddServer($event)" (blueprintAdd)="onAddBlueprint($event)" ></app-cockpit> -->
+          <!-- <button
+          class="btn btn-primary"
+          (click)="onAddServer()">Add Server</button>
+        <button
+          class="btn btn-primary mx-2"
+          (click)="onAddBlueprint()">Add Server Blueprint</button> -->
+          <!-- <hr /> -->
+          <!-- <app-server [serverEl]="servers"></app-server> -->
+
+      </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 my-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

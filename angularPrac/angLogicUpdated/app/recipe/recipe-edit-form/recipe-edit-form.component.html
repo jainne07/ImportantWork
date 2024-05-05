@@ -1,0 +1,111 @@
+<form (ngSubmit)="submit()" [formGroup]="recipeForm">
+  <div class="row">
+    <div class="col-sm-12 mt-5 mb-3">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!recipeForm.valid"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-danger mx-2" (click)="onClear()">
+        Cancel
+      </button>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="my-2">
+      <div
+        *ngIf="
+          recipeForm.get('name')?.errors?.required &&
+          recipeForm.get('name')?.touched
+        "
+        class="text-danger"
+      >
+        Please enter name
+      </div>
+      <div
+        *ngIf="
+          recipeForm.get('imagpath')?.errors?.required &&
+          recipeForm.get('imagpath')?.touched
+        "
+        class="text-danger"
+      >
+        Please enter imagepath
+      </div>
+      <div
+        *ngIf="
+          recipeForm.get('description')?.errors?.required &&
+          recipeForm.get('description')?.touched
+        "
+        class="text-danger"
+      >
+        Please enter description
+      </div>
+    </div>
+    <label for="name">Name</label>
+    <input type="text" id="name" class="form-control" formControlName="name" />
+  </div>
+  <div class="form-group">
+    <label for="image">image Path</label>
+    <input
+      type="text"
+      id="image"
+      class="form-control"
+      formControlName="imagpath"
+    />
+  </div>
+  <div>
+    <img src="" alt="" class="img-fluid" />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      cols="10"
+      rows="10"
+      class="form-control"
+      formControlName="description"
+    ></textarea>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12" formArrayName="ingredient">
+      <div
+        class="row"
+        *ngFor="let ingredientCtrl of recipeControls?.controls; let i = index"
+        [formGroupName]="i"
+        style="margin-top: 10px"
+      >
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="name" />
+        </div>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" formControlName="amount" />
+        </div>
+        <div class="col-sm-2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDeleteIngredient(i)"
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-12">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="onAddIngredient()"
+          >
+            Add Ingredient
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</form>

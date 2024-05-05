@@ -1,0 +1,7 @@
+<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <div><input type="text" name="user" formControlName="user"></div>
+        <span *ngIf="user && user.invalid && user.touched" [style.color]="'red'">Please enter name</span>
+        <div><input type="email" name="email" formControlName="email"></div>
+        <span *ngIf="email && email.invalid && email.touched" [style.color]="'red'">Please enter email</span>
+        <div><input type="submit" value="submit" [disabled]="loginForm.invalid"></div>
+</form>

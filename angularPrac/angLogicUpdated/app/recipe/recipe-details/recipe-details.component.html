@@ -1,0 +1,48 @@
+<div *ngIf="!recipeDetail">Please select any recipe</div>
+<div *ngIf="recipeDetail">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>
+        {{ recipeDetail.name }}
+        <div class="dropdown">
+          <button
+            id="my-dropdown"
+            class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            (click)="drop($event)"
+          >
+            Manage
+          </button>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="my-dropdown"
+            [class.show]="dropdown"
+            #eleRef
+          >
+            <a class="dropdown-item"(click)="addShopping()">Add to ingredients</a>
+            <a class="dropdown-item" (click)="onDelete()">Delete</a>
+            <a class="dropdown-item" (click)="onEdit()">Edit</a>
+          </div>
+        </div>
+      </h2>
+      <img
+        [src]="recipeDetail.imagpath"
+        alt="{{ recipeDetail.name }}"
+        width="100px"
+        height="auto"
+        class="float-left mr-3"
+      />
+      <p>
+        {{
+          recipeDetail.description[0].toUpperCase() +
+            recipeDetail.description.slice(1)
+        }}
+      </p>
+      <div *ngFor="let ing of recipeDetail.ingredient">
+        <small class="text-muted">{{ ing.name }}- {{ ing.amount }}</small>
+      </div>
+    </div>
+  </div>
+</div>
