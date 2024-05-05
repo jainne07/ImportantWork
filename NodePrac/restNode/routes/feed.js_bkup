@@ -1,0 +1,71 @@
+const express = require("express");
+const router = express.Router();
+const { v4: generateId } = require('uuid');
+const {writeData, readData, fileCreate} =require('../data/util')
+
+// let posts = [
+//   {
+//     id: 1,
+//     title: "Node Api",
+//     description: "Node restApi",
+//   },
+//   {
+//     id: 2,
+//     title: "Node",
+//     description: "Also learn node",
+//   },
+//   {
+//     id: 3,
+//     title: "Node 12",
+//     description: "Also learn node 13",
+//   },
+// ];
+// router.get("/get-post", (req, res, next) => {
+//   res.status(200).json({
+//     posts: posts,
+//   });
+// });
+// router.post("/create-post", (req, res, next) => {
+//   const post = {
+//     id: +Math.random().toFixed(5),
+//     title: req.body.title,
+//     description: req.body.description,
+//   };
+//   posts.push(post);
+//   res.status(201).json({
+//     message: "created post sucessfully",
+//     post: post,
+//     posts: posts,
+//   });
+// });
+// router.patch("/update-post/:id", (req, res, next) => {
+//   const params = req.params.id;
+//   const postId = posts.findIndex((item) => item.id === +params);
+//   if (postId >= 0) {
+//     console.log(postId)
+//     posts[postId] = {
+//       id: +params,
+//       title: req.body.title,
+//       description: req.body.description,
+//     };
+//     res.status(200).json({
+//       message: "Updated post sucessfully",
+//       posts: posts,
+//     });
+//   }
+//    res.status(404).json({
+//       message: "Could not find for this id"
+//     });
+// });
+// router.delete("/delete-post/:id", (req, res, next) => {
+// const params = req.params.id;
+// const postId = posts.findIndex((item) => item.id === +params);
+// const post=posts.filter((v)=> v.id !== +params)
+// //console.log('PostId',postId,'Params', +params)
+// posts.splice(postId, 1)
+//   res.status(200).json({
+//     message: "delete post sucessfully",
+//     posts: post
+//   });
+// });
+module.exports = router;
