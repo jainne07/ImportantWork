@@ -1,0 +1,421 @@
+@import 'reset'; 
+ 
+$color-gainsboro: #c0c0c0; 
+$color-dimgrey: #696969; 
+$color-slategrey: #708090; 
+section span { color: $color-dimgrey; font-size: 20px; 
+font-weight: bold; } 
+p { color: $color-gainsboro; font-size: 16px; font-weight: bold;} 
+a { color: $color-slategrey; text-decoration: none; } 
+a:hover { text-decoration: underline; background-color: 
+antiquewhite; font-weight: bold 
+} 
+$color-slategrey: #708090; 
+ 
+@mixin centerdiv { position: absolute; left: 50%; top: 
+50%; transform: translate(-50%, -50%); } 
+div.box { 
+@include centerdiv; 
+ 
+width: 40%; height: 20%; padding: 20px; background: 
+$color-slategrey; color: antiquewhite; text-align: 
+center; box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); 
+border-radius: 10px; font-size: 18px; font-weight: 
+bold; letter-spacing: 1px; 
+} 
+ 
+@mixin button-bg($bg, $fg) { 
+  background: $bg; 
+  color: $fg; 
+  &:hover { 
+   background:darken($bg,8%); 
+   transition: all 0.3s ease; 
+  } 
+  &:active { 
+   background:darken($bg,30%); 
+  } 
+ } 
+.btn-antiquewhite { @include button-bg(#faebd7, #000); } 
+.btn-darkgrey { @include button-bg(#a9a9a9, #000); } 
+.btn-gainsboro{ @include button-bg(#dcdcdc, #000); } 
+.btn-slategrey { @include button-bg(#708090, #fff); } 
+ 
+.sidebar { 
+  position: static; 
+  height: 100%; 
+  
+  &-list { 
+   background-color: white; 
+  
+   &-link { 
+    text-decoration: underline; 
+   } 
+  } 
+ } 
+ .error { 
+  border: 1px solid #f00; 
+  background-color: #fdd; 
+  margin:7px 0px; 
+ } 
+ 
+ //number based operation 
+p{ 
+  $width: 780px; 
+  width: calc($width / 2); 
+ } 
+ 
+ //operation of string based 
+ p:before { 
+  content: "I ate #{2 + 10} large apples. " ; 
+ } 
+ 
+ //Boolean-Based Operators 
+ p:before { 
+  $count: 51; 
+  $yes: 1; 
+  @if ($count > 3 and $yes == 1) { 
+   content: "I ate #{5 + 10} large apples. "; 
+  } 
+ } 
+ 
+ //List-Based Operators 
+$colors: red green blue; 
+$padding: 10px, 20px, 30px; 
+$border: solid, dotted; 
+ 
+div.sidebar { 
+  background: nth($colors, 3); 
+  padding: nth($padding, 1); // "20px" 
+  border: 2px nth($border, 2); 
+ } 
+ 
+  
+ .seriousError { 
+  @extend .error; 
+  border-width: 3px; 
+ } 
+//@if 
+@mixin avatar($size, $circle: false) { 
+  width: $size; 
+  height: $size; 
+  
+  @if $circle { 
+   border-radius: calc($size/2); 
+  } 
+ } 
+  
+ .square-av { 
+  @include avatar(100px, $circle: false); 
+ } 
+ .circle-av { 
+  @include avatar(100px, $circle: true); 
+ } 
+ 
+$light-background: #f2ece4; 
+$light-text: #036; 
+$dark-background: #6b717f; 
+$dark-text: #d2e1dd; 
+ 
+@mixin theme-colors($light-theme: true) { 
+ @if $light-theme { 
+  background-color: $light-background; 
+  color: $light-text; 
+ } @else { 
+  background-color: $dark-background; 
+  color: $dark-text; 
+ } 
+} 
+ 
+.banner { 
+ @include theme-colors($light-theme: true); 
+ body.dark & { 
+  @include theme-colors($light-theme: false); 
+ } 
+} 
+// $first-color: if(true, antiquewhite, black); 
+// $second-color: if(false, black, slategrey); 
+// $third-color: if(4 > 2, silver, black); 
+// li:nth-of-type(1) { 
+//   background: $first-color; 
+//   @if (lightness($first-color) > 75%) { 
+//     color: black; 
+//    } @else { 
+//     color: white; 
+//   } 
+//  } 
+  
+//  li:nth-of-type(2) { 
+//   @if 1 + 1 == 2 { background: $second-color; } 
+//   @if 5 > 3 { border: 3px dotted $third-color;} 
+//   @if true { font-family: 'sans-serif'; } 
+//  } 
+  
+//  li:nth-of-type(3) { 
+//   background: $third-color; 
+//   @if (lightness($third-color) > 75%) { 
+//     color: black; 
+//    } @else { 
+//     color: white; 
+//   } 
+//  } 
+  
+//  li:nth-of-type(4) { 
+//   @if 1 + 1 == 2 { background: darken($second-color, 50%); } 
+//   @else if 1 + 2 == 3 { background: $second-color; } 
+//   @else if 5 > 3{ border: 2px dotted $third-color; } 
+//   color:white 
+//  } 
+ 
+//Applying Styles Using @for 
+$rainbow: silver slategrey antiquewhite darkgrey gainsboro; 
+@for $i from 1 through 5 { 
+ ul.list li:nth-child(#{$i}) { 
+  color: nth($rainbow, $i); 
+  font-size: 22px; 
+  font-weight: bold; 
+ } 
+} 
+ 
+//@each 
+ 
+$sizes: 40px, 50px, 80px; 
+ 
+@each $size in $sizes { 
+ .icon-#{$size} { 
+  font-size: $size; 
+  height: $size; 
+  width: $size; 
+ } 
+} 
+$icons: 
+ "eye" "\f112" 12px, 
+ "start" "\f12e" 16px, 
+ "stop" "\f12f" 10px; 
+ 
+@each $name, $glyph, $size in $icons { 
+ .icon-#{$name}:before { 
+  display: inline-block; 
+  font-family: "Icon Font"; 
+  content: $glyph; 
+  font-size: $size; 
+ } 
+} 
+$publish: gainsboro; 
+$postpone: antiquewhite; 
+$delete: silver; 
+ 
+$states: (publish, $publish), 
+    (postpone, $postpone), 
+    (delete, $delete); 
+    button { color: #000; text-decoration: none; padding: 
+      5px 10px; border-radius: 3px; font-family: 'Poiret One', 
+      cursive; font-size: 32px; font-weight: bold; outline: 0; margin:0px 0px 10px} 
+    @each $buttonstate, $color in $states { 
+      .#{$buttonstate} { 
+       background-color: $color; 
+      
+       &:hover { background-color: darken( $color, 10% ); 
+          transition: all 0.3s ease; } 
+       &:active { background: darken($color,25%); } 
+      } 
+     } 
+ 
+//@while 
+$start-color: gainsboro; 
+$end-color: black; 
+$white: #ffffff; 
+ 
+$step: 1; // Set the initial step value 
+ul.mix { margin: 0; padding: 0;  
+ & li{ 
+    color: $white; 
+    display: inline-block; 
+    font-size: 24px; 
+    list-style-type: none; 
+    margin-bottom: 3.2px; 
+    padding: 8px; 
+    width: 80px; 
+ } 
+} 
+ 
+@while $step <=10 { 
+ // changes from one color to another 
+ ul.mix li:nth-child(#{$step}) { 
+  background-color: mix($end-color, $start-color, 
+  ($step * 10)); 
+ } 
+ 
+ $step: $step + 1; 
+} 
+//map-get 
+$styling-figcaption: ( 
+ 'text-align': center, 
+ 'font-family': Reenie Beanie, 
+ 'font-size': 20.8px, 
+ 'color': #454f40, 
+ 'letter-spacing': 1.44px, 
+); 
+figcaption { 
+  text-align: map-get($styling-figcaption, 'text-align'); 
+  font-family: map-get($styling-figcaption, 'font-family'); 
+  font-size: map-get($styling-figcaption, 'font-size'); 
+  color: map-get($styling-figcaption, 'color'); 
+  letter-spacing: map-get($styling-figcaption, 'letter-spacing'); 
+ } 
+ 
+ $media-queries: ( 
+  tablet: ( 
+   breakpoint: '(min-width: 480px) and (max-width: 768px)', 
+  ), 
+  mobile: ( 
+   breakpoint: '(max-width: 480px)' 
+  ) 
+ ); 
+ @mixin media-query ($size) { 
+  @each $item, $value in $media-queries { 
+   @if $item == $size { 
+    @if map-get($value, breakpoint) != null { 
+     @media only screen and #{map-get($value, 
+     breakpoint)} { 
+      @content; 
+     } 
+    } 
+   } 
+  } 
+ } 
+ .row { display: inline-block; width: 100%; font-size: 
+  22.4px; 
+   text-align: center; color: #FFF; padding: 4% 10%; box-sizing: border-box; } 
+   
+  .row { 
+   background: darkgrey; 
+   @include media-query(mobile) { 
+    background: lightgrey; 
+   } 
+   @include media-query(tablet) { 
+    background: darkgrey; 
+   } 
+  }  
+  $width-small: 400px; 
+  $width-medium: 760px; 
+  $width-large: 1200px; 
+   
+  @mixin responsive($width) { 
+   @if $width == wide-screens { 
+    @media only screen and (max-width: $width-large) { @content; } 
+   } 
+   @else if $width == medium-screens { 
+    @media only screen and (max-width: $width-medium) { @content; } 
+   } 
+   @else if $width == small-screens { 
+    @media only screen and (max-width: $width-small) { @content; } 
+   } 
+  } 
+  #content { 
+    float: left; 
+    width: 70%; 
+    @include responsive(wide-screens) { 
+     width: 80%; 
+    } 
+    @include responsive(medium-screens) { 
+     width: 50%; 
+     font-size: 14px; 
+    } 
+    @include responsive(small-screens) { 
+     float: none; 
+     width: 100%; 
+     font-size: 12px; 
+    } 
+   } 
+   h1 { 
+    font-size: 40px; 
+    @include responsive(wide-screens) { font-size: 48px; } 
+    @include responsive(medium-screens) { font-size: 32px; } 
+    @include responsive(small-screens){ font-size: 20px; } 
+   } 
+ 
+//mixins 
+@mixin rounded($radius) { 
+  -webkit-border-radius: $radius; 
+   -moz-border-radius: $radius; 
+      border-radius: $radius; 
+ } 
+ @mixin shadow($x, $y, $blur, $color) { 
+  -webkit-box-shadow: $x $y $blur $color; 
+   -moz-box-shadow: $x $y $blur $color; 
+      box-shadow: $x $y $blur $color; 
+ } 
+ @mixin shadow-inset($x, $y, $blur, $color) { 
+  -webkit-box-shadow: inset $x $y $blur $color; 
+   -moz-box-shadow: inset $x $y $blur $color; 
+      box-shadow: inset $x $y $blur $color; 
+ } 
+ @mixin transition($property) { 
+  -webkit-transition: $property .2s ease; 
+   -moz-transition: $property .2s ease; 
+    -o-transition: $property .2s ease; 
+      transition: $property .2s ease; 
+ } 
+ @mixin box-sizing { 
+  -webkit-box-sizing: border-box; 
+   -moz-box-sizing: border-box; 
+      box-sizing: border-box; 
+ } 
+ @mixin linear-gradient($from, $to) { 
+  /* Fallback for sad browsers */ 
+  background-color: $to; 
+  /* Mozilla Firefox */ 
+  background-image:-moz-linear-gradient($from, $to); 
+  /* Opera */ 
+  background-image:-o-linear-gradient($from, $to); 
+  /* WebKit (Chrome 11+) */ 
+  background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, $from), color-stop(1, $to)); 
+  /* WebKit (Safari 5.1+, Chrome 10+) */ 
+  background-image: -webkit-linear-gradient($from, $to); 
+  /* IE10 */ 
+  background-image: -ms-linear-gradient($from, $to); 
+  /* W3C */ 
+  background-image: linear-gradient($from, $to); 
+ } 
+ 
+  
+@mixin retinize($file, $type, $width, $height) { 
+  background-image: url('../img/' + $file + '.' + $type); 
+  
+  @media (-webkit-min-device-pixel-ratio: 1.5), 
+     (min--moz-device-pixel-ratio: 1.5), 
+     (-o-min-device-pixel-ratio: 3/2), 
+     (min-device-pixel-ratio: 1.5), 
+     (min-resolution: 1.5dppx) { 
+   & { 
+    background-image: url('../img/' + $file + '-2x.' + $type); 
+    -webkit-background-size: $width $height; 
+     -moz-background-size: $width $height; 
+        background-size: $width $height; 
+   } 
+  } 
+ } 
+ //@function 
+ @function sum($numbers...) { 
+  $sum: 0; 
+  @each $number in $numbers { 
+   $sum: $sum + $number; 
+  } 
+  @return $sum; 
+ } 
+  
+ .micro { 
+  width: sum(50px, 30px, 100px); 
+ } 
+ 
+ @function pow($base, $exponent) { 
+  $result: 1; 
+  @for $_ from 1 through $exponent { 
+   $result: $result * $base; 
+  } 
+  @return $result; 
+ } 
+  
+ .sidebar { 
+  margin-left: pow(4, 3) * 1px; 
+ } 

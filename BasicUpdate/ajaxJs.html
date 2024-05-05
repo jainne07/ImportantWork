@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Document</title> 
+  <style> 
+    body{ 
+      font-size:15px; 
+      font-family:Verdana, Geneva, Tahoma, sans-serif; 
+    } 
+    /* #result{ 
+       
+      border:1px solid #000; 
+      padding: 10px; 
+    } */ 
+    .email{ 
+      font-size: 12px; 
+      color:#000 
+    } 
+    ul{ 
+      background-color:ivory; 
+      padding: 10px; 
+      margin: 0px 0px 10px; 
+      border:1px solid #000 
+    } 
+    ul li{ 
+      list-style-type: none; 
+    } 
+  </style> 
+</head> 
+<body> 
+  <button id="ajaxData">click here</button> 
+ <div id="result"></div> 
+ <div id="user"></div> 
+ <script> 
+   document.getElementById('ajaxData').addEventListener("click",loadtext) 
+   function loadtext(){ 
+    var xhr =new XMLHttpRequest(); 
+  // xhr.open('GET','sample.txt',true); 
+  xhr.open('GET','user.json',true); 
+  //  console.log("xhr", xhr.readyState)   
+  //  xhr.onreadystatechange=function(){ 
+  //    console.log("xhr-onrea", xhr.readyState) 
+  //  } 
+  //  xhr.onprogress=function(){ 
+  //    console.log("xhr-prog", xhr.readyState)  
+  //  } 
+    
+   xhr.onload=function(){ 
+     //console.log("xhr-onl", xhr.readyState) 
+     if(this.status==200){ 
+       //console.log(this.responseText) 
+       //document.getElementById('result').innerHTML=this.responseText 
+       var data=JSON.parse(this.responseText) 
+       //console.log(data) 
+       var output=[] 
+      //  for(var i=0; i<data.length; i++){ 
+      //   output +=` 
+      //  <ul><li>${data[i].name}</li><li>${data[i].gender}</li><li>${data[i].email}</li></ul> 
+      //  ` 
+      //  } 
+       for(var i in data){ 
+        output +=` 
+       <ul><li>${data[i].name}</li><li>${data[i].gender}</li><li class="email">${data[i].email}</li></ul> 
+      `  
+       } 
+       document.getElementById('user').innerHTML=output 
+        
+      } 
+   } 
+   xhr.send() 
+   } 
+    
+ </script> 
+</body> 
+</html> 

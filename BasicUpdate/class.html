@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Document</title> 
+</head> 
+<body> 
+  <div id="user"></div> 
+  <div id="userid"></div> 
+  <script> 
+    class User { 
+static userCount = 0; 
+static #passwordLevel = 1; 
+phoneNumber = "+91 2993849384"; 
+#email = "abhilasha.sinha@walkingtree.tech"; 
+constructor(firstName, lastName,emailId = "", userId = 
+"asinha") { 
+/* 
+  if( new.target === User ) { 
+ throw new TypeError("User is an abstract class. You cannot create an instance directly!"); 
+ } 
+*/ 
+this.firstName = firstName; 
+this.lastName = lastName; 
+this.userId = userId; 
+this.#email=emailId; 
+User.userCount++; 
+console.log('User Count = ' + User.userCount); 
+} 
+getUserName() { 
+ return this.firstName + " " + this.lastName; 
+} 
+changeName(newFirstName, newLastName) { 
+this.firstName = newFirstName; 
+this.lastName = newLastName; 
+} 
+static create(firstName, lastName, emailId,userId) { 
+ return new User(firstName, lastName, emailId, userId); 
+} 
+whoAmI() { 
+ return "I am a User! " + " My email ID is " + 
+ this.#email + " and my Password Level = " + 
+ User.#passwordLevel; 
+} 
+} 
+ 
+class PowerUser extends User { 
+constructor( firstName, lastName, userId, role ) 
+{ 
+super(firstName, lastName, userId); 
+this.role = role; 
+} 
+ 
+get userRole() { 
+ return this.role; 
+} 
+set userRole( newRole ) { 
+this.role = newRole; 
+} 
+whoAmI() { 
+ return "I am a PowerUser!"; 
+} 
+} 
+appus = new PowerUser("Alok", "Ranjan", 
+"aranjan", "Manager"); 
+console.log(appus.getUserName()) 
+console.log(appus.userRole) 
+console.log(appus.whoAmI()) 
+appUser = User.create("Abhilasha", "Sinha"); 
+console.log( appUser.getUserName()); 
+anotherUser = User.create("Ranjit", "Battewad", 
+"rbattewad"); 
+console.log( anotherUser.getUserName()); 
+anUsr=new User('Sam',"Smith") 
+console.log(anUsr.getUserName()); 
+apUs = new User("Abhilasha", "Sinha"); 
+ 
+console.log( apUs.getUserName() + " with the Phone Number: " + apUs.phoneNumber); 
+appuser = new User("Alok", "Ranjan", "aranjan"); 
+anUs = User.create("Ranjit", "Battewad", 
+"ranjit.battewad@walkingtree.tech", "rbattewad"); 
+console.log(anUs.whoAmI()) 
+document.getElementById("user").innerHTML = appuser.getUserName(); 
+document.getElementById("userid").innerHTML = appuser.userId; 
+ 
+//Inheriting from built-in objects 
+class CustomMap extends Map { 
+get(entry) { 
+ let valueForKey = super.get(entry); 
+ if ( valueForKey == undefined ) { 
+ return "The value for the " + entry + " does not exist!"; 
+ } else { 
+ return valueForKey; 
+ } 
+} 
+} 
+let userArray = [['rb', 'Ranjit Battewad'],['as', 'Abhilasha Sinha'], ['ar', 'Alok Ranjan']]; 
+ 
+let mapInstance = new CustomMap(userArray); 
+ 
+console.log(mapInstance.get('as')); 
+ 
+console.log(mapInstance.get('=')); 
+ 
+  </script> 
+</body> 
+</html> 
+ 

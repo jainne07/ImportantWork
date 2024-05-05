@@ -1,0 +1,25 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Document</title> 
+</head> 
+<body> 
+ <script> 
+   var webworker = new Worker("webworkerEx.js"); 
+// Send information to worker 
+webworker.postMessage("Sample message"); 
+// Listen for messages from the worker 
+// webworker.addEventListener("message", function(event) { 
+// // `event.data` contains the value or object sent from the worker 
+// console.log("Message from worker:", event.data); // ["foo", "bar", "baz"] 
+// }); 
+webworker.onmessage = function(event) { 
+console.log("Message from worker:", event.data); // ["foo", "bar", "baz"] 
+} 
+ </script>  
+</body> 
+</html> 
+ 

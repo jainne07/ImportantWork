@@ -1,0 +1,27 @@
+[ 
+  { 
+  "name": "Bird Ramsey", 
+  "gender": "male", 
+  "company": "NIMON", 
+  "email": "birdramsey@nimon.com" 
+  }, 
+  { 
+    "name": "Lillian Burgess", 
+    "gender": "female", 
+    "company": "LUXURIA", 
+    "email": "lillianburgess@luxuria.com" 
+  }, 
+  { 
+    "name": "Kristie Cole", 
+    "gender": "female", 
+    "company": "QUADEEBO", 
+    "email": "kristiecole@quadeebo.com" 
+  }, 
+  { 
+    "name": "Leonor Cross", 
+    "gender": "female", 
+    "company": "GRONK", 
+    "email": "leonorcross@gronk.com" 
+ } 
+] 
+ 

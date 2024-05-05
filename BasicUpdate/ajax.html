@@ -1,0 +1,96 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>jquery</title> 
+  <script src="jquery-3.6.0.min.js"></script> 
+  <style> 
+    body{ 
+      font-family: Verdana, Geneva, Tahoma, sans-serif; 
+      font-size:14px 
+    } 
+    ul{ 
+      padding: 0px; 
+      margin:0px 
+    } 
+    ul li{ 
+    margin:0px 0px 15px; 
+    list-style: none; 
+    padding: 10px; 
+    background-color: ghostwhite; 
+    border:1px solid #ccc 
+    } 
+    h4{ 
+      text-transform: capitalize; 
+      margin:0px 0px 5px 
+       
+    } 
+  </style> 
+</head> 
+<body> 
+ 
+<button>click here</button> 
+<div class="status"></div> 
+<ul id="userData"></ul> 
+<div id="result"></div> 
+<ul id="users"></ul> 
+<script> 
+  $(function(){ 
+    // $('#result').load('check.html',function(responseTxt,statusTxt,xhr){ 
+    //   if(statusTxt =='success'){ 
+    //     alert("hello, It is working") 
+    //   } 
+    //   else if(statusTxt =='error'){ 
+    //     alert("Error "+ xhr.statusText) 
+    //   } 
+    // }) 
+    // $.get('check.html',function(data){ 
+    //   $('#result').html(data) 
+    // }) 
+    // $.getJSON('user.json', function(data){ 
+    //   $.each(data, function(i, user){ 
+    //     $("ul#users").append("<li><b>Name</b>: "+ user.name + ", <b>Email</b>: " + user.email+"</li>") 
+    //   }) 
+    // }) 
+    // $.ajax({ 
+    //   method:'GET', 
+    //   url:'https://jsonplaceholder.typicode.com/posts', 
+    //   dataType:'json' 
+    // }).done(function(data){ 
+    //   console.log(data); 
+    //   $.map(data, function(post,i){ 
+    //     var index=i+1 
+    //    $("ul#userData").append("<li><h4>"+index+". "+post.title + ", </h4><div> " + post.body+"</div></li>") 
+    //   }) 
+    // }) 
+    $('button').click(function(){ 
+      $(document).ajaxSend(function(){ 
+         
+        $('.status').append('sending...') 
+      }) 
+      $(document).ajaxStart(function(){ 
+        $('.status').append('starting...') 
+      }) 
+      $(document).ajaxSuccess(function(){ 
+        $('.status').append('success...') 
+      }) 
+      $(document).ajaxComplete(function(){ 
+        $('.status').append('complete...') 
+      }) 
+      $.get('check.html',function(data){ 
+        console.log('success') 
+        $('#result').append(data) 
+      }) 
+      // $(document).ajaxError(function(event,xhr,settings, thrownError){ 
+      //   console.log('error: ',event); 
+      //   console.log('xhr: ',xhr); 
+      //   console.log('settings: ',settings); 
+      //   console.log('thrownError: ',thrownError); 
+      // }) 
+    }) 
+  }) 
+</script> 
+</body> 
+</html> 

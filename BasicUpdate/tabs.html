@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Tabs</title> 
+  <style> 
+    body{ 
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+      font-size: 16px; 
+    } 
+    #tabContent ul{ 
+      margin:0px 0px; 
+      padding: 0px; 
+    } 
+ 
+    #tabContent ul li{ 
+      list-style-type: none; 
+      display: inline-block; 
+      width:80px; 
+      margin: 0px; 
+    } 
+    #tabContent a{ 
+      display: block; 
+      padding: 10px; 
+      background-color: whitesmoke; 
+      color:#000; 
+      text-decoration:none; 
+    } 
+    #tabContent ul li a.active{ 
+      background-color:silver; 
+    } 
+    .tab-pane{ 
+      border: 2px solid whitesmoke; 
+      padding: 10px; 
+      margin:0px 10px 10px 0px 
+    } 
+    .hide{ 
+      display: none; 
+    } 
+  </style> 
+</head> 
+<body> 
+  <div id="tabContent"> 
+    <ul> 
+      <li><a href="#item-1" class="tab">item1</a></li> 
+      <li><a href="#item-2" class="tab">item2</a></li> 
+      <li><a href="#item-3" class="tab">item3</a></li> 
+    </ul> 
+    <!-- <a href="#item-1" class="tab">item1</a> 
+    <a href="#item-2" class="tab">item2</a> 
+    <a href="#item-3" class="tab">item3</a> --> 
+  </ul> 
+  </div> 
+  <div id="item-1" class="tab-pane"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci quae mollitia vero eveniet, quia tempore earum, nobis impedit quod perspiciatis magnam dolore iusto!</div> 
+    <div id="item-2" class="tab-pane"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate ex temporibus voluptatibus! Deserunt, accusamus corrupti? Nulla debitis facilis deleniti magnam, quam architecto distinctio dolorum cum molestiae vel quae id obcaecati. Optio nam quaerat cupiditate.</div> 
+    <div id="item-3" class="tab-pane">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum at dolor vel.</div> 
+  <script> 
+  var tab = document.getElementById('tabContent'); 
+  tab.addEventListener('click', loadTab) 
+  function loadTab(e){ 
+    e.preventDefault();  
+    var id= e.target.hash.split('-')[1]  
+    console.log(id) 
+    tabPanel() 
+    tp() 
+    document.getElementById('item-'+id).classList.remove("hide")  
+    e.target.classList.add("active")  
+  } 
+  function tabPanel(){ 
+    var tabPn=document.querySelectorAll('.tab-pane') 
+    for(var i = 0; i<tabPn.length;i++){ 
+      tabPn[i].classList.add('hide') 
+    } 
+     
+  } 
+  function tp(){ 
+    var tabLk=document.querySelectorAll('.tab') 
+    for(var i = 0; i<tabLk.length;i++){ 
+      tabLk[i].classList.remove('active') 
+    } 
+  } 
+  function tabFirst(){ 
+    tabPanel(); 
+    tp(); 
+    document.querySelector('.tab-pane').classList.remove('hide') 
+    document.querySelector('.tab').classList.add('active') 
+  } 
+  tabFirst() 
+  </script> 
+</body> 
+</html> 

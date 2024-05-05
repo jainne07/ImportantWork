@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Js Essential</title> 
+</head> 
+<body> 
+<button id="1" class="btn1" onClick="addClNw(this, 'newClass')">B1</button> 
+<button id="2" class="btn2" onClick="addClNw(this, 'newClass')">B2</button> 
+<button id="3" class="" onClick="addClNw(this, 'newClass')">B3</button> 
+<h2>Great Web resources</h2> 
+<ul id="resources"> 
+      <li><a href="http://opera.com/wsc">Opera Web Standards 
+Curriculum</a></li> 
+<li><a href="http://sitepoint.com" >Sitepoint</a> </li> 
+ <li><a href="http://alistapart.com">A List Apart</a></li> 
+<li><a href="http://yuiblog.com">YUI Blog</a></li> 
+<li><a href="http://blameitonthevoices.com">Blame it on the 
+voices</a></li> 
+<li><a href="http://oddlyspecific.com">Oddly specific</a></ 
+li> 
+</ul> 
+  <script> 
+var numbers = [3,342,23,22,124, 1]; 
+var max = 0; 
+for(var i=0;i<numbers.length;i++){ 
+ if(numbers[i] > max){ 
+  max = numbers[i]; 
+ } 
+} 
+console.log("loop",max);  
+ 
+//shorter version 
+numbers.sort((a,b)=>a-b) 
+console.log(numbers[0]) 
+ 
+//shorter version 
+var maxNo=Math.max(...numbers) 
+console.log(maxNo) 
+ 
+//add class 
+function addCl(elm, newClass) 
+ { 
+var c = elm.className; 
+ elm.className = (c === '') ? newClass: c+' '+newClass; 
+} 
+ 
+function addClNw(elm,newclass){ 
+ var classes = elm.className.split(' '); 
+ classes.push(newclass); 
+ elm.className = classes.join(' '); 
+} 
+//event delegation  
+/*(function(){ 
+ var resources = document.getElementById('resources'); 
+ var links = resources.getElementsByTagName('a'); 
+ var all = links.length; 
+ for(var i=0;i<all;i++){ 
+ // Attach a listener to each link 
+ links[i].addEventListener('click',handler,false); 
+ }; 
+ function handler(e){ 
+  var x = e.target; // Get the link that was clicked 
+  alert(x); 
+  e.preventDefault(); 
+ }; 
+})(); 
+*/ 
+(function(){ 
+  var resources = document.getElementById('resources'); 
+  resources.addEventListener('click', handler, false) 
+  function handler(e){ 
+    var l=e.target; 
+    console.log(e) 
+    if(l.nodeName.toLowerCase()==='a'){ 
+      alert("Event delegation: "+l); 
+      e.preventDefault(); 
+    } 
+  } 
+})(); 
+  </script> 
+</body> 
+</html> 

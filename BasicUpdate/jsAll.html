@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic javascript</title>
+  </head>
+  <body>
+    <script>
+      //sorting array
+      var arr = [2, 13, 51, 63, 7, 18];
+      arr.sort(function (a, b) {
+        return b - a;
+      });
+      console.log(arr);
+      //Convert Array-like Objects to Arrays in ES6
+      const arrayLike = {
+        0: "Value 0",
+        1: "Value 1",
+        length: 2,
+      };
+      const realArray = Array.from(arrayLike);
+      realArray.forEach((value) => {
+        value;
+      }); // Works
+      console.log(realArray);
+
+      //2method
+      var rlarr = Object.values(arrayLike);
+      console.log(rlarr);
+
+      //3method
+      var rlar = Object.keys(arrayLike).map((key) => arrayLike[key]);
+      console.log(rlar);
+
+      //Convert Array-like Objects to Arrays in ES5
+      //var rlary = Array.prototype.slice.call(arrayLike);
+      rlary = [].slice.call(arrayLike); // Shorter version
+      console.log(rlary);
+
+      //2method
+      rary = [].forEach.bind(arrayLike)(function (val) {
+        console.log(val);
+      });
+
+      //3method
+      var samp = Array.from(arrayLike, (element) => element);
+      console.log(samp);
+
+      //Flatten Array of Objects
+      var array = [
+        {
+          key: "one",
+          value: 1,
+        },
+        {
+          key: "two",
+          value: 2,
+        },
+        {
+          key: "three",
+          value: 3,
+        },
+      ];
+
+      var mthd1 = array.reduce(function (obj, current) {
+        obj[current.key] = current.value;
+        return obj;
+      }, {});
+
+      var mthd2 = array.reduce(
+        (obj, current) =>
+          Object.assign(obj, {
+            [current.key]: current.value,
+          }),
+        {}
+      );
+
+      var mthd3 = array.reduce(
+        (obj, current) => ({ ...obj, [current.key]: current.value }),
+        {}
+      );
+      console.log(mthd1);
+      console.log(mthd2);
+      console.log(mthd3);
+
+      //find unique values
+      var arr = [1, 2, 1, 5, 9, 5];
+      var unq = arr.reduce((prev, number) => {
+        if (prev.indexOf(number) === -1) {
+          prev.push(number);
+        }
+        return prev;
+      }, []);
+      console.log(unq);
+
+      //map
+      var sam = ["one", "two", "three", "four"].map((value) => value.length);
+      console.log(sam);
+
+      //filter
+      var numbers = [5, 32, 43, 21, 23, 46, 67, 4];
+      var odd = numbers.filter((num) => num % 2 !== 0);
+      console.log(odd);
+
+      var people = [
+        {
+          id: 1,
+          name: "John",
+          age: 28,
+        },
+        {
+          id: 2,
+          name: "Jane",
+          age: 31,
+        },
+        {
+          id: 3,
+          name: "Peter",
+          age: 55,
+        },
+      ];
+
+      let young = people.filter((p) => p.age < 35);
+      console.log(young);
+
+      //let japlha=people.filter(p=> p.name.indexOf("J")===0)
+      let japlha = people.filter((p) => p.name.includes("J"));
+      console.log(japlha);
+
+      var arrPep = ["sam", "suresh", "james"];
+      for (var i = 0; i < arrPep.length; i++) {
+        console.log(arrPep[i]);
+      }
+
+      //for ...in
+      for (var i in arrPep) {
+        console.log(arrPep[i]);
+      }
+
+      //for..of
+      for (var i of arrPep) {
+        console.log(arrPep);
+      }
+
+      //copy arrow
+      arrayToClone = [1, 2, 3, 4, 5];
+      clone1 = Array.from(arrayToClone);
+      clone2 = Array.of(...arrayToClone);
+      clone3 = [...arrayToClone]; // the shortest way
+      console.log(clone1);
+      console.log(clone2);
+      console.log(clone3);
+      //v5
+      arrayToClone = [1, 2, 3, 4, 5];
+      clone4 = Array.prototype.slice.call(arrayToClone);
+      clone5 = [].slice.call(arrayToClone);
+      console.log(clone4);
+      console.log(clone5);
+
+      //concet array
+      var array1 = [1, 21, 32];
+      var array2 = [3, 4, 5];
+      //Version ≥ 3
+      var array3 = array1.concat(array2); // returns a new array
+      console.log(array3);
+      //Version ≥ 6
+      var array4 = [...array1, ...array2];
+      console.log(array4);
+
+      //Without Copying the First Array
+      var longArray = [1, 2, 3, 4, 5, 6, 7, 8],
+        shortArray = [9, 10];
+      //longArray.push.apply(longArray, shortArray);
+      //longArray.push(...shortArray)
+      shortArray.forEach(function (elem) {
+        longArray.push(elem);
+      });
+      console.log(longArray);
+
+      //Array and non-array values
+      var array = ["a", "b"];
+      //Version ≥ 3
+      var arrConc = array.concat("c", "d");
+      console.log(arrConc);
+      //Version ≥ 6
+      var arrConc1 = [...array, "c", "d"];
+      console.log(arrConc1);
+
+      //Merge two array as key value pair
+      var columns = ["Date", "Number", "Size", "Location", "Age"];
+      var rows = ["2001", "5", "Big", "Sydney", "25"];
+      var result = rows.reduce(function (result, field, index) {
+        result[columns[index]] = field;
+        return result;
+      }, {});
+      console.log(result);
+
+      //spread operator & rest operator
+      let arra = [1, 2, 3, ...[4, 5, 6]];
+      console.log(arra);
+      let mkarr = [..."12345"];
+      console.log(mkarr);
+
+      function myFunction(a, b, c) {
+        return a + " " + b + " " + c;
+      }
+      let args = [0, 1, 2];
+      console.log(myFunction(...args));
+
+      [a, b, ...rest] = [1, 2, 3, 4, 5, 6];
+      console.log(rest);
+
+      //searching array
+      let pep = [{ name: "bob" }, { name: "john" }];
+      // var srch=pep.find(person=>person.name=="bob")
+      // console.log(srch)
+
+      for (var i = 0; i < pep.length; i++) {
+        if (pep[i].name === "bob") {
+          console.log("true");
+          break; // we found bob
+        }
+      }
+
+      //convert string to array
+      var strArray = "StackOverflow".split("");
+      console.log(strArray);
+
+      //min max
+      var myArray = [1, 2, 3, 4, 99, 20];
+      var maxVal = Math.max(...myArray);
+      var minVal = Math.min(...myArray);
+      console.log(maxVal);
+      console.log(minVal);
+      function maxValFun(arr) {
+        let maxnum;
+        for (let i = 0; i < arr.length; i++) {
+          if (!maxnum) {
+            // protect against an array of values less than 0
+            maxnum = arr[i];
+          }
+          if (arr[i] > maxnum) {
+            maxnum = arr[i];
+          }
+        }
+        return maxnum;
+      }
+      console.log(maxValFun(myArray));
+
+      var mthRed = myArray.reduce((a, b) => Math.max(a, b));
+      var mthRed1 = myArray.reduce((a, b) => Math.min(a, b));
+      console.log(mthRed);
+      console.log(mthRed1);
+
+      //Object keys and values to array
+      var object = {
+        key1: 10,
+        key2: 3,
+        key3: 40,
+        key4: 20,
+      };
+      var arObj = [];
+      for (var people in object) {
+        arObj.push([people, object[people]]);
+      }
+      console.log(arObj);
+
+      //every
+      var chkarr = [1, 2, 1].every((item, i, list) => item === list[0]);
+      console.log(chkarr);
+      let data = [
+        { name: "alice", id: 111 },
+        { name: "alice", id: 222 },
+      ];
+      var chk = data.every((item, i, list) => item.name === list[0].name);
+      console.log(chk);
+
+      //slice and splice
+      var splc = [1, 2, 3, 4];
+      splc.splice(1, 2);
+      console.log(splc);
+      var values = [1, 2, 3, 4, 5, 3];
+      var i = values.indexOf(3);
+      if (i >= 0) {
+        values.splice(i, 1);
+      }
+      console.log(values);
+      var i = values.length + 1;
+      values.splice(i, 0, 6, 7, 8);
+      console.log(values);
+
+      var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      var newArr = arr.slice(4);
+      var newSl = arr.slice(4, 6);
+      console.log(newArr);
+      console.log(newSl);
+
+      console.log("String");
+      //other types using the String() function
+      var intString = String(32); // "32"
+      var booleanString = String(true); // "true"
+      var nullString = String(null); // "null"
+      console.log(intString + ", " + booleanString + ", " + nullString);
+      //convert Numbers, Booleans or Objects to Strings
+      var intString = (5232).toString(); // "5232"
+      var booleanString = false.toString(); // "false"
+      var objString = {}.toString(); // "[object Object]"
+      console.log(intString + ", " + booleanString + ", " + objString);
+
+      //reverse String
+      function reverseString(str) {
+        return [...String(str)].reverse().join("");
+      }
+      console.log(reverseString("stackoverflow")); // "wolfrevokcats"
+      console.log(reverseString(1337)); // "7331"
+      console.log(reverseString([1, 2, 3]));
+
+      function rev(str) {
+        var res = "";
+        for (var i = str.length - 1; i >= 0; i--) {
+          res += str[i];
+        }
+        return res;
+      }
+      console.log(rev("hello reverse string"));
+
+      //access chararcter
+      var string = "Hello, World!";
+      console.log(string.charAt(1));
+      console.log(string[3]);
+
+      //string to array
+      var s = "one, two, three, four, five";
+      s.split(", ");
+      console.log(s);
+
+      //detecting string
+      var aString = "my string";
+      var anInt = 5;
+      var anObj = {};
+      typeof aString === "string"; // true
+      typeof anInt === "string"; // false
+      typeof anObj === "string";
+
+      var s1 = "0123456789abcdefg";
+      var sl1 = s1.slice(0, 3); // "01234"
+      console.log(sl1);
+
+      var string = "Hello, World!";
+      console.log(string.indexOf("o")); // 4
+      console.log(string.indexOf("foo")); // -1
+
+      var string = "Hello, World!";
+      console.log(string.lastIndexOf("o")); // 8
+      console.log(string.lastIndexOf("foo")); // -1
+
+      var string = "Hello, World!";
+      console.log(string.includes("Hello")); // true
+      console.log(string.includes("foo"));
+
+      //repeat
+      "abc".repeat(3);
+
+      //object shallow cloning
+      const existing = { a: 1, b: 2, c: 3 };
+      const clone = Object.assign({}, existing);
+      console.log(clone);
+
+      const cloneNw = { ...existing };
+      console.log(cloneNw);
+
+      var ext = { a: 1, b: 2, c: 3, d: 4 };
+      var cln = {};
+      for (var prop in ext) {
+        if (ext.hasOwnProperty(prop)) {
+          cln[prop] = ext[prop];
+        }
+      }
+      console.log(cln);
+
+      var obj = {
+        foo: "foo",
+        bar: [1, 2, 3],
+        baz: {
+          foo: "nested-foo",
+        },
+      };
+      Object.freeze(obj);
+      console.log(obj);
+      // Cannot add new properties
+      obj.newProperty = true;
+      // Cannot modify existing values or their descriptors
+      obj.foo = "not foo";
+      // Cannot delete existing properties
+      delete obj.foo;
+      // Nested objects are not frozen
+      obj.bar.push(4);
+      obj.baz.foo = "new foo";
+
+      //object assign
+      var user = {
+        firstName: "John",
+      };
+      Object.assign(user, { lastName: "Doe", age: 39 });
+      console.log(user);
+
+      var obj = Object.assign({}, user);
+      console.log(obj);
+
+      var obj1 = {
+        a: 1,
+      };
+      var obj2 = {
+        b: 2,
+      };
+      var obj3 = {
+        c: 3,
+        d: 4,
+        e: 5,
+      };
+      var obj = Object.assign(obj1, obj2, obj3);
+      console.log(obj);
+
+      //object iteration
+      var objNwEx = { 0: "a", 1: "b", 2: "c" };
+      Object.keys(objNwEx).map(function (key) {
+        console.log(key);
+      });
+
+      Object.values(objNwEx).map(function (val) {
+        console.log(val);
+      });
+
+      for (const [key, value] of Object.entries(objNwEx)) {
+        console.log("key: ", key); // "one", "two" and "three"
+        console.log("value: ", value); // 1, 2 and 3
+      }
+
+      let objSprd = { a: 1 };
+      let objSprdtwo = { ...objSprd, b: 2, c: 3 };
+      console.log(objSprdtwo);
+
+      var person = { name: "John", surname: "Doe" };
+      Object.defineProperty(person, "fullName", {
+        get: function () {
+          return this.name + " " + this.surname;
+        },
+        set: function (value) {
+          [this.name, this.surname] = value.split(" ");
+        },
+      });
+      console.log(person.fullName);
+      person.fullName = "Mary Jones";
+      console.log(person.name);
+
+      //object's values to array
+      var objar = {
+        a: "hello",
+        b: "this is",
+        c: "javascript!",
+      };
+      var arrObj = Object.keys(objar).map((key) => objar[key]);
+      console.log(arrObj);
+
+      var sampleObject = {
+        hello: "world",
+      };
+      var sm = Object.getOwnPropertyDescriptor(sampleObject, "hello");
+      console.log(sm);
+
+      //constructor
+      function Cat(name) {
+        this.name = name;
+        this.sound = "Meow";
+      }
+      Cat.prototype.speak = function () {
+        console.log(this.sound);
+      };
+      var cat = new Cat("micky");
+      console.log(cat.name);
+      cat.speak();
+      console.log(cat.constructor);
+      console.log(cat instanceof Cat);
+
+      //set
+      const names = ["bob", "alejandro", "zandra", "anna", "bob"];
+      const uniqueNames = new Set(names);
+      for (let name of uniqueNames) {
+        console.log(name);
+      }
+
+      const map = new Map().set("abc", 1).set("def", 2);
+
+      for (const iteration of map) {
+        console.log(iteration); //will log ['abc', 1] and then ['def', 2]
+      }
+      for (const [key, value] of map) {
+        console.log(key + " is mapped to " + value);
+      }
+
+      //curry
+      function prism(l) {
+        return function (w) {
+          return function (h) {
+            return l * w * h;
+          };
+        };
+      }
+      console.log(prism(3)(3)(12));
+      var prsm = (l) => (w) => (h) => l * w * h;
+      console.log(prsm(2)(11)(2));
+
+      //arguments
+      function logSomeThings() {
+        for (var i = 0; i < arguments.length; ++i) {
+          console.log(arguments[i]);
+        }
+      }
+      logSomeThings("hello", "world", "make this example");
+
+      function personLogsSomeThings(person, ...msg) {
+        msg.forEach((arg) => {
+          console.log(person, "says", arg);
+        });
+      }
+      personLogsSomeThings("John", "hello", "world", "make this example");
+
+      const logArguments = (...args) => console.log(args);
+      const list = [1, 2, 3];
+      logArguments("a", "b", "c", ...list);
+
+      const logArg = (...args) => console.log(args);
+      function* generateNumbers() {
+        yield 6;
+        yield 5;
+        yield 4;
+      }
+      logArg("a", ...generateNumbers(), ..."pqr", "b");
+
+      //default parameter
+      function msgp(msg) {
+        msg = typeof msg !== "undefined" ? msg : "default msg has show";
+        console.log(msg);
+      }
+      function msgd(msg = "defaultmsg") {
+        console.log(msg);
+      }
+      msgd();
+      msgd("hello change default");
+      msgp();
+
+      //Reusing the function's return value in a new invocation's default value:
+      let aee = [1]; // meaningless: this will be overshadowed in the function's scope
+      function add(value, aee = []) {
+        aee.push(value);
+        return aee;
+      }
+
+      console.log(add(5));
+      console.log(add(6, add(4)));
+
+      //bind
+      function showName(label) {
+        console.log(label + ":" + this.name);
+      }
+      var student1 = {
+        name: "Ravi",
+      };
+      var student2 = {
+        name: "Vinod",
+      };
+      // create a function just for student1
+      var showNameStudent1 = showName.bind(student1);
+      showNameStudent1("student1"); // outputs "student1:Ravi"
+      // create a function just for student2
+      var showNameStudent2 = showName.bind(student2, "student2");
+      showNameStudent2(); // outputs "student2:Vinod"
+      // attaching a method to an object doesn't change `this` value of that method.
+      student2.sayName = showNameStudent1;
+      student2.sayName("student2");
+
+      //call and apply
+      function sum(a, b) {
+        return this.name + ", " + (a + b);
+      }
+      var person = {
+        name: "Vikas",
+      };
+      console.log(sum.call(person, 3, 4));
+      console.log(sum.apply(person, [21, 4]));
+
+      //objects
+      const someObject = { name: "Mike", age: 34 };
+      for (let key of Object.keys(someObject)) {
+        console.log(key + ": " + someObject[key]);
+      }
+      var object = { a: "foo", b: "bar", c: "baz" };
+      // `a` is inaccessible
+      Object.defineProperty(object, "a", {
+        enumerable: false,
+      });
+
+      for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+          console.log("object." + key + ", " + object[key]);
+        }
+      }
+
+      //// Calculate the Fibonacci value for each number in an array:
+      var fib = false;
+      var rslt = [1, 2, 3, 4, 5, 6, 7, 8].map(function fib(n) {
+        return n <= 2 ? 1 : fib(n - 1) + fib(n - 2);
+      });
+      console.log(rslt);
+
+      //Accepting Functions as Arguments
+      function transform(fn, arr) {
+        let result = [];
+        for (let el of arr) {
+          result.push(fn(el)); // We push the result of the transformed item to result
+        }
+        return result;
+      }
+      console.log(transform((x) => x * 2, [1, 2, 3, 4]));
+
+      //inherit function
+      var Human = function () {
+        this.canSpeak = true;
+      };
+      // Basic greet function which will greet based on the canSpeak flag
+      Human.prototype.greet = function () {
+        if (this.canSpeak) {
+          console.log("Hi, I am " + this.name);
+        }
+      };
+      var Student = function (name, title) {
+        Human.call(this); // Instantiating the Human object and getting the memebers of the class
+        this.name = name; // inheriting the name from the human class
+        this.title = title; // getting the title from the called function
+      };
+      Student.prototype = Object.create(Human.prototype);
+      Student.prototype.constructor = Student;
+      Student.prototype.greet = function () {
+        if (this.canSpeak) {
+          console.log("Hi, I am " + this.name + ", the " + this.title);
+        }
+      };
+      var Customer = function (name) {
+        Human.call(this); // inheriting from the base class
+        this.name = name;
+      };
+      Customer.prototype = Object.create(Human.prototype); // creating the object
+      Customer.prototype.constructor = Customer;
+      var bill = new Student("Billy", "Teacher");
+      var carter = new Customer("Carter");
+      var andy = new Student("Andy", "Bill");
+      var virat = new Customer("Virat");
+      bill.greet();
+      // Hi, I am Bob, the Teacher
+      carter.greet();
+      // Hi, I am Carter
+      andy.greet();
+      // Hi, I am Andy, the Bill
+      virat.greet();
+
+      //class inherit
+      class MyClass {
+        constructor() {
+          this.names_ = [];
+        }
+        set name(value) {
+          this.names_.push(value);
+        }
+        get name() {
+          return this.names_[this.names_.length - 1];
+        }
+      }
+      const myClassInstance = new MyClass();
+      myClassInstance.name = "Joe";
+      myClassInstance.name = "Bob";
+      console.log(myClassInstance.name); // logs: "Bob"
+      console.log(myClassInstance.names_); // logs: ["Joe", "Bob"]
+
+      //domcontent
+      document.addEventListener("DOMContentLoaded", function (event) {
+        console.log("Hello! I am loaded");
+      });
+
+      //inherit
+      function Foo() {}
+      Foo.style = "bold";
+      var foo = new Foo();
+      console.log(Foo.style); // 'bold'
+      console.log(foo.style); // undefined
+      Foo.prototype.style = "italic";
+      console.log(Foo.style); // 'bold'
+      console.log(foo.style); // 'italic'
+
+      //method chaining
+      function Door() {
+        this.height = "";
+        this.width = "";
+        this.status = "closed";
+      }
+      Door.prototype.open = function () {
+        this.status = "opened";
+        return this;
+      };
+      Door.prototype.close = function () {
+        this.status = "closed";
+        return this;
+      };
+      Door.prototype.setParams = function (width, height) {
+        this.width = width;
+        this.height = height;
+        return this;
+      };
+      Door.prototype.doorStatus = function () {
+        console.log(
+          "The",
+          this.width,
+          "x",
+          this.height,
+          "Door is",
+          this.status
+        );
+        return this;
+      };
+      var smallDoor = new Door();
+      smallDoor.setParams(20, 100).open().doorStatus().close().doorStatus();
+
+      //error control-flow
+      const expected = true;
+      function compare(actual, success, failure) {
+        if (actual === expected) {
+          success();
+        } else {
+          failure();
+        }
+      }
+      function onSuccess() {
+        console.log("Value was expected");
+      }
+      function onFailure() {
+        console.log("Value was unexpected/exceptional");
+      }
+      compare(true, onSuccess, onFailure);
+      compare(false, onSuccess, onFailure);
+
+      function compareAsync(actual, success, failure) {
+        setTimeout(function () {
+          compare(actual, success, failure);
+        }, 1000);
+      }
+      compareAsync(true, onSuccess, onFailure);
+      compareAsync(false, onSuccess, onFailure);
+      console.log("Doing something else");
+
+      function waitFunc() {
+        console.log("This will be logged every 5 seconds");
+      }
+
+      //setinterval
+      var interval = window.setInterval(waitFunc, 5000);
+      window.setTimeout(function () {
+        clearInterval(interval);
+      }, 32000);
+
+      function waitFuncNw() {
+        console.log("This will not be logged after 5 seconds");
+      }
+      function stopFunc() {
+        clearTimeout(timeout);
+      }
+      var timeout = window.setTimeout(waitFuncNw, 1000);
+      window.setTimeout(stopFunc, 5000);
+
+      //cookie
+      if (navigator.cookieEnabled === false) {
+        alert("Error: cookies not enabled!");
+      }
+
+      //local storage
+      localStorage.setItem("name", "John Smith");
+      console.log(localStorage.getItem("name")); // "John Smith"
+      //localStorage.removeItem('name');
+      //console.log(localStorage.getItem('name')); // null
+      var players = [
+        { name: "Tyler", score: 22 },
+        { name: "Ryan", score: 41 },
+      ];
+      localStorage.setItem("players", JSON.stringify(players));
+      console.log(JSON.parse(localStorage.getItem("players")));
+      var main = JSON.parse(localStorage.getItem("players"));
+      var output = "";
+      main.forEach(
+        (user) => (output += `${user.name} is scored ${user.score} `)
+      );
+      console.log(output);
+
+      console.log(localStorage.length);
+      localStorage.clear();
+      //console.log(localStorage.length);
+
+      //Parsing with a reviver function json
+      var jsonString =
+        '[{"name":"John","score":51},{"name":"Jack","score":17}]';
+      var dta = JSON.parse(jsonString, function reviver(key, value) {
+        return key === "name" ? value.toUpperCase() : value;
+      });
+      console.log(dta);
+
+      //ver6
+      const jsn = '[{"name":"John","score":51},{"name":"Jack","score":17}]';
+      const dataNw = JSON.parse(jsn, (key, value) =>
+        key === "name" ? value.toUpperCase() : value
+      );
+      console.log(dataNw);
+
+      //Serializing with a replacer function
+      const userRecords = [
+        { name: "Joe", points: 14.9, level: 31.5 },
+        { name: "Jane", points: 35.5, level: 74.4 },
+        { name: "Jacob", points: 18.5, level: 41.2 },
+        { name: "Jessie", points: 15.1, level: 28.1 },
+      ];
+      // Remove names and round numbers to integers to anonymize records before sharing
+      const anonymousReport = JSON.stringify(userRecords, (key, value) =>
+        key === "name"
+          ? undefined
+          : typeof value === "number"
+          ? Math.floor(value)
+          : value
+      );
+      console.log(anonymousReport);
+
+      //generators
+      function* nums() {
+        console.log("starting"); // A
+        yield 1; // B
+        console.log("yielded 1"); // C
+        yield 2; // D
+        console.log("yielded 2"); // E
+        yield 3; // F
+        console.log("yielded 3"); // G
+      }
+      var generator = nums();
+      generator.next();
+
+      //promises
+      function resolve(value, milliseconds) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(value), milliseconds)
+        );
+      }
+      // wait "millis" ms, then reject with "reason"
+      function reject(reason, milliseconds) {
+        return new Promise((_, reject) =>
+          setTimeout(() => reject(reason), milliseconds)
+        );
+      }
+      Promise.all([resolve(1, 5000), resolve(2, 6000), resolve(3, 7000)]).then(
+        (values) => console.log(values)
+      ); // outputs "[1, 2, 3]" after 7 seconds.
+      Promise.all([resolve(1, 5000), reject("Error!", 6000), resolve(2, 7000)])
+        .then((values) => console.log(values))
+        .catch((reason) => console.log(reason));
+
+      Promise.all([resolve(1, 5000), resolve(2, 6000), { hello: 3 }]).then(
+        (values) => console.log(values)
+      );
+
+      Promise.all([
+        resolve(11, 5000),
+        resolve(21, 6000),
+        resolve(31, 7000),
+      ]).then(([result1, result2, result3]) => {
+        console.log(result1);
+        console.log(result2);
+        console.log(result3);
+      });
+      //destructing function arguments
+      let userNw = {
+        name: "Jill",
+        age: 33,
+        profession: "Pilot",
+      };
+      function greeting({ name, profession }) {
+        console.log(`Hello, ${name} the ${profession}`);
+      }
+      greeting(userNw);
+
+      //array
+      let parts = ["Hello", "World!"];
+      function gret([first, second]) {
+        console.log(`${first} ${second}`);
+      }
+      gret(parts);
+    </script>
+  </body>
+</html>

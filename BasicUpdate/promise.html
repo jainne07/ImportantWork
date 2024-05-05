@@ -1,0 +1,198 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Document</title> 
+</head> 
+<body> 
+<input type="password" onmousedown="enterInput(event)"> 
+ 
+<p id="feedback"></p> 
+<p>Click DIV1 Element</p> 
+<div onclick="secondFunc()">DIV 2 
+<div onclick="firstFunc(event)">DIV 1</div> 
+</div> 
+<script> 
+ 
+//promises 
+// then() accepts two callbacks: 
+const myNewPromise = new Promise((resolve, 
+reject) => { 
+if (1< 6) { 
+resolve('Hello, My promise was a success!'); 
+} 
+reject(new Error('My promise failed')); 
+}); 
+/* 
+myNewPromise.then((success) => { 
+console.log(success); 
+}, (error) => { 
+console.log(error); 
+}); 
+*/ 
+ 
+myNewPromise 
+.then(success=>console.log(success)) 
+.catch(error=>console.log(error)) 
+ 
+//myNewPromise.then(success=>console.log(success)) 
+console.log(myNewPromise) 
+var promise1 = new Promise(function(resolve, reject) { 
+setTimeout(resolve, 500, 'one'); 
+}); 
+var promise2 = new Promise(function(resolve, reject) { 
+setTimeout(resolve, 100, 'two'); 
+}); 
+ 
+var promise3 = new Promise(function(resolve, reject) { 
+setTimeout(resolve, 200, 'three'); 
+}); 
+Promise.all([promise1, promise2, promise3]).then(function(value) { 
+console.log(value); 
+}); 
+Promise.race([promise1, promise2]).then(function(value) { 
+console.log(value); // "two" // Both promises will resolve, but promise2 is faster 
+}); 
+const printAddr = (string) => { 
+promise= new Promise( (resolve) => { 
+setTimeout(() =>{ 
+console.log(string); 
+resolve(string); 
+}, 2000); 
+} 
+); 
+return promise; 
+} 
+/* 
+const getAddress = () => 
+{ 
+printAddr("121 Worcester Rd") 
+.then(()=>{ 
+return printAddr("Fairhaven"); 
+}) 
+.then(()=>{ 
+return printAddr("NY 14228"); 
+}) 
+.catch((err) =>{ 
+console.log(err); 
+}); 
+} 
+ 
+getAddress(); 
+*/ 
+//async await 
+async function aFunc() { 
+return 10;// this becomes an implicit promise 
+} 
+aFunc().then(result=>console.log(result)) 
+ 
+//It can return a promise explicitly as shown: 
+ 
+async function explicitFunc() { 
+return Promise.resolve(10); 
+} 
+console.log(explicitFunc()); // shows a promise 
+explicitFunc().then((result) => console.log 
+(result)); // 10 
+//It can also resolve into an error as shown: 
+ 
+/*async function explicitErrFunc() { 
+return Promise.reject(new Error('This explicitpromise is rejected with error!')); 
+} 
+explicitErrFunc().catch(err => console.log(err)); */ 
+ 
+function RestFn(num1,...nums) { 
+console.log(num1, nums); 
+return num1 *nums.length; 
+} 
+console.log(RestFn(10, 20, "helloJS", true, 50)) 
+ 
+const obj= { 
+firstName: 'Virat', 
+lastName: 'Kohli' 
+}; 
+const {firstName, lastName} = obj; 
+console.log(firstName);// Virat 
+console.log(lastName); 
+ 
+var arr1=[1,2,3,4,[5,6,7,[8,9,10,[11,12,13, 
+[14]]]]]; 
+console.log(arr1.flat(2)) 
+console.log(arr1.flat(Infinity)) 
+ 
+//This method can be applied to any similar Array or map to convert into an Object. 
+arrayName=['First','Second','Third'] 
+age=[11,12,13]; 
+mapped =arrayName.map((each,index) => [each, age[index]]); 
+console.log(mapped);//[["First", 11],["Second",12], ["Third", 13]) 
+final= Object.fromEntries(mapped);// {First: 11, Second: 12, Third: 13} 
+console.log(final) 
+ 
+//swapping var 
+let a= 12; 
+let b=23; 
+[a, b] = [b, a] 
+console.log(a, b) 
+ 
+//symbol 
+const symbol1 = Symbol(); 
+const symbol2 = Symbol(42); 
+const symbol3 = Symbol('foo'); 
+ 
+console.log(typeof symbol1); // symbol 
+console.log(symbol3.toString()); // Symbol(foo) 
+console.log(Symbol('foo') === Symbol('foo')); 
+ 
+const sym = Symbol() 
+ 
+const privateObject = { 
+[sym]: 'Hello World' 
+} 
+ 
+console.log(privateObject[sym]) 
+ 
+var title = 'ES6'; 
+var iterateIt = title[Symbol.iterator](); 
+ 
+console.log(iterateIt.next().value); //output: E 
+console.log(iterateIt.next().value); //output: S 
+console.log(iterateIt.next().value); //output: 6 
+ 
+//capslock on/off behaviour  
+function enterInput(e) { 
+var flag = e.getModifierState("CapsLock"); 
+if(flag) { 
+document.getElementById("feedback").innerHTML = "CapsLock activated"; 
+ 
+} else { 
+document.getElementById("feedback").innerHTML = "CapsLock not activated"; 
+} 
+} 
+ 
+function firstFunc(event) { 
+alert("DIV 1"); 
+event.stopPropagation(); 
+} 
+ 
+function secondFunc() { 
+alert("DIV 2"); 
+} 
+ 
+///map without using map method 
+const countries = [ 
+{ name: 'India', capital: 'Delhi' }, 
+{ name: 'US', capital: 'Washington' }, 
+{ name: 'Russia', capital: 'Moscow' }, 
+{ name: 'Singapore', capital: 'Singapore' }, 
+{ name: 'China', capital: 'Beijing' }, 
+{ name: 'France', capital: 'Paris' }, 
+]; 
+ 
+const cityNames = Array.from(countries, ({ capital}) => capital); 
+console.log(cityNames); 
+</script> 
+</body> 
+</html> 
+ 
