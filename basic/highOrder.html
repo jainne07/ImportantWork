@@ -206,5 +206,9 @@ console.log(sol11)
 //Is there at least one character that has mass less than 50?
 const sol12=characters.some(a=> +a.mass < 50)
 console.log(sol12)
+//get every third number
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const everyThirdNumber = numbers.filter((_, index) => (index + 1) % 3 === 0)
+console.log(everyThirdNumber)
 </script>
 </html>
