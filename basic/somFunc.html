@@ -192,6 +192,24 @@
             return arr;
 }
 console.log(sortArray([2, 6, 0, 4, 3, 4, 3, 5, 9, 6, 12, 43, 6]));
+
+//gcd no
+function gcdno(a,b){
+    while(b !==0){
+        [a,b]=[b,a%b]
+    }
+    return a;
+}
+console.log(gcdno(56, 98))
+
+//phone format 
+const createPhoneNumber = numbers => {
+return numbers.reduce((str,num)=>str.replace('x',num), '(xxx) xxx-xxxx')
+};
+
+console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])); // '(123) 456-7890'
+console.log(createPhoneNumber([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])); // '(111) 111-1111'
+console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])); // '(123) 456-7890'
     </script>
   </body>
 </html>
